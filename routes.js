@@ -16,6 +16,10 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
+router.get("/final", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "final.html"));
+});
+
 // Handle form submission
 router.post("/data", async (req, res) => {
     const { playerName, contactNumber, emailAddress, college, otherCollegeName } = req.body;
