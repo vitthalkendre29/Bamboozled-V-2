@@ -1,4 +1,3 @@
-// Define problem sets
 export const paragraphProblems = [
     {
         id: 1,
