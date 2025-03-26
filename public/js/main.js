@@ -1,6 +1,11 @@
 import { equationProblems } from "./equation.js"
 import { paragraphProblems } from "./paragraph.js";
 
+console.log(paragraphProblems);
+console.log(equationProblems);
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.getElementById("modifiedInput");
     let currentLevel = 1; // Default to level 1
