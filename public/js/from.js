@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 otherCollegeNameError.style.display = 'none';
             }
         }
-
         // If all validations pass, submit the form (you can replace this with actual submission logic)
         
     });

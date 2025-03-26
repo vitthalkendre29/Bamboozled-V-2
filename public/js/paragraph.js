@@ -1,4 +1,4 @@
-const paragraphProblems = [
+export const paragraphProblems = [
     {
         id: 5,
         title: "Text Analysis",
@@ -21,4 +21,3 @@ const paragraphProblems = [
     }
 ];
 
-export default paragraphProblems;
