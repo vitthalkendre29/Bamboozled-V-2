@@ -24,7 +24,7 @@
 <div class="container">
     <!-- Page title -->
     <h1 class="form-title">Registration</h1>
-    <form action="http://localhost:3000/data" method="post" id="registrationForm">
+    <form action="https://bamboozled-v-2.vercel.app/data" method="post" id="registrationForm">
         <div class="form-group">
             <label for="playerName" class="label">Player Name</label>
             <input type="text" id="playerName" name="playerName" placeholder="Enter your full name" required>
@@ -83,7 +83,7 @@
             otherCollegeName = ""; // Clear otherCollegeName if not "Other"
         }
 
-        let response = await fetch("http://localhost:3000/data", {
+        let response = await fetch("https://bamboozled-v-2.vercel.app/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
