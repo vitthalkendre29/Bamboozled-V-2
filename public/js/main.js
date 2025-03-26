@@ -1,10 +1,53 @@
-import { equationProblems } from "./equation.js"
-import { paragraphProblems } from "./paragraph.js";
+// Define problem sets
+const paragraphProblems = [
+    {
+        id: 5,
+        title: "Text Analysis",
+        description: "Write a program that analyzes a text passage to count the frequency of each word, identify the most common words, and calculate the average word length. The program should be case-insensitive and ignore punctuation. Additionally, implement a feature to identify sentences with more than 20 words, as these may be candidates for simplification. Your solution should efficiently handle large texts and provide a summary report with the following metrics: total word count, unique word count, average word length, most frequent words (top 5), longest word, and a list of potentially complex sentences.",
+    },
+    {
+        id: 6,
+        title: "Data Compression Algorithm",
+        description: "Design and implement a lossless data compression algorithm that can efficiently compress and decompress text files. Your algorithm should achieve a balance between compression ratio and processing speed. The implementation should include both compression and decompression functions, handle various types of input texts (including binary data represented as text), and provide metrics about the compression performance. Documentation should explain the approach, the time and space complexity of your algorithm, and compare its performance against standard compression algorithms like Huffman coding or LZW compression. Bonus points for implementing multiple compression techniques and allowing the user to choose between them based on their priorities.",
+    },
+    {
+        id: 7,
+        title: "Path Finding Algorithm",
+        description: "Implement a pathfinding algorithm to find the shortest path between two points in a 2D grid that contains obstacles. The grid is represented as a matrix where 0 indicates a free cell and 1 indicates an obstacle. The algorithm should efficiently find the shortest path from a starting position to a target position, avoiding all obstacles. Your implementation should include at least two different pathfinding algorithms (e.g., A*, Dijkstra's, BFS) and compare their performance in terms of execution time and path optimality. The solution should visualize the grid, the obstacles, and the computed path. Additionally, implement a feature that allows for diagonal movement with a customizable cost factor.",
+    },
+    {
+        id: 8,
+        title: "Natural Language Processing",
+        description: "Develop a program that performs sentiment analysis on text input, classifying it as positive, negative, or neutral. Your solution should use a combination of lexicon-based approaches and basic machine learning techniques. The program should preprocess the text (removing stopwords, stemming, tokenization), extract relevant features, and apply a classification algorithm. Include a training mode where the system can learn from labeled examples and improve its accuracy over time. Your implementation should provide not just the overall sentiment score but also identify the most influential words or phrases that contributed to the classification. Additionally, create a simple mechanism to handle negations and intensifiers in the text, as they can significantly alter the sentiment.",
+    }
+];
 
-console.log(paragraphProblems);
-console.log(equationProblems);
-
-
+const equationProblems = [
+    {
+        id: 1,
+        title: "Linear Equation Solver",
+        description: "Write a program to solve a system of linear equations using Cramer's rule: ax + by = c and dx + ey = f.",
+        example: "Input: a=2, b=3, c=8, d=1, e=1, f=4 → Output: x=1, y=2"
+    },
+    {
+        id: 2,
+        title: "Quadratic Equation Solver",
+        description: "Write a program to find the roots of a quadratic equation ax² + bx + c = 0 using the quadratic formula.",
+        example: "Input: a=1, b=-5, c=6 → Output: x=2, x=3"
+    },
+    {
+        id: 3,
+        title: "Matrix Multiplication",
+        description: "Write a program to multiply two matrices A and B and return the resulting matrix C.",
+        example: "Input: A=[[1,2],[3,4]], B=[[5,6],[7,8]] → Output: C=[[19,22],[43,50]]"
+    },
+    {
+        id: 4,
+        title: "Differential Equation",
+        description: "Write a program to solve the first-order ordinary differential equation dy/dx = f(x,y) using the Euler method.",
+        example: "Input: dy/dx = x + y, y(0) = 1, step size = 0.1, interval [0,1] → Output: y(1) ≈ 4.7"
+    }
+];
 
 document.addEventListener("DOMContentLoaded", function () {
     const inputField = document.getElementById("modifiedInput");
@@ -13,6 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft = 20; // 5 minutes in seconds
     let completedtime=timeLeft;
     let downloadAttempted = false;
+    let downloadAttemptedandretry = false;
     
     // Function to get a random item from an array
     function getRandomItem(arr) {
