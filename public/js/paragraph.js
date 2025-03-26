@@ -1,4 +1,4 @@
-export const paragraphProblems = [
+const paragraphProblems = [
     {
         id: 1,
         title: "Black Holes: Cosmic Mysteries",
@@ -100,3 +100,5 @@ export const paragraphProblems = [
         description: "With rising sea levels, architects are designing **underwater cities**! Japan is building **Ocean Spiral**, a city beneath the waves. These futuristic cities could house thousands, using **hydrothermal energy** for power!"
     }
 ];
+
+export default paragraphProblems;

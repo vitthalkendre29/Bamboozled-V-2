@@ -1,4 +1,4 @@
-export const equationProblems = [
+const equationProblems = [
     {
         id: 1,
         title: "Linear Equation Solver",
@@ -26,3 +26,4 @@ export const equationProblems = [
 ];
 
 
+export default equationProblems;
