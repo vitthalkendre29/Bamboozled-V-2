@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap");
+
+:root {
+        --primary-color: #1c0f2d;
+        --secondary-color: #2d0359;
+        --accent-color: #c4298e;
+        --light-bg: #f8fafc;
+        --white: #FFFFFF;
+        --border-color: rgba(196, 41, 142, 0.3);
+        --text-primary: #FFFFFF;
+        --text-secondary: rgba(255, 255, 255, 0.7);
+        --success: #059669;
+        --error: #DC2626;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: "Exo 2", sans-serif;
+}
+
+body {
+    background-color: var(--primary-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-primary);
+    padding: 20px;
+    overflow-x: hidden;
+}
+/* Header styles */
+header {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 1300px;
+    }
+
+.logo {
+    width: 130px;
+    height: 130px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(196, 41, 142, 0.7);
+    animation: pulse 2s infinite;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.logo:before {
+    content: "";
+    position: absolute;
+    width: 150%;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    top: -30px;
+    left: -100px;
+    animation: shine 1s infinite;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+}
+
+.title h1 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 30px;
+}
+
+.title h2 {
+    font-family: "Orbitron", sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #2d0359, #c4298e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    animation: colorShift 5s infinite;
+    margin-left: 30px;
+}
+
+.page-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 68px;
+    font-weight: 900;
+    background: linear-gradient(90deg, #450787, #da2c9d);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(196, 41, 142, 0.5); }
+    50% { box-shadow: 0 0 25px rgba(196, 41, 142, 0.8); }
+    100% { box-shadow: 0 0 10px rgba(196, 41, 142, 0.5); }
+}
+
+@keyframes colorShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 40px;
+    }
+    
+    .container {
+        width: 95%;
+        padding: 20px;
+    }
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.final-content {
+  background: rgba(45, 3, 89, 0.5);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 0 30px rgba(196, 41, 142, 0.5);
+  max-width: 1000px;
+  width: 100%;
+}
+
+.thank-you {
+  font-family: "Orbitron", sans-serif;
+  font-size: 48px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #c4298e, #2d0359);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-family: "Orbitron", sans-serif;
+  font-size: 24px;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, #c4298e, #2d0359);
+  -webkit-background-clip: text;
+}
+
+
+.feedback-box {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid rgba(196, 41, 142, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 24px;
+}
+.submit-btn {
+  color: #f84b12;
+  border: none;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Orbitron", sans-serif;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #00a86b, #00ff87);
+}
+
+.event-pictures-btn, .coordinators-btn, .close-modal-btn {
+  background: linear-gradient(135deg, #2d0359, #c4298e);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Orbitron", sans-serif;
+  max-width: 1000px;
+}
+
+.submit-btn:hover, .event-pictures-btn:hover, .coordinators-btn:hover, .close-modal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+}
+
+.event-pictures-btn {
+    position: fixed;
+    bottom: 75px;
+    right: 20px;
+    border-radius: 50px;
+    width: 10%;
+}
+
+/* Modal Styles */
+#picturesModal, #coordinatorsModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.pictures-container {
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 20px;
+  width: 80%;
+  max-width: 800px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(196, 41, 142, 0.5);
+  border: 1px solid rgba(196, 41, 142, 0.3);
+  text-align: center;
+  position: relative;
+}
+
+.pictures-container h2{
+    font-family: "Orbitron", sans-serif;
+    font-size: 28px;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fefefe, #fab68c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gallery-image {
+  max-width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.gallery-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.nav-btn {
+  background: rgba(45, 3, 89, 0.5);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: rgba(196, 41, 142, 0.5);
+}
+
+.coordinators-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50px;
+  width: 10%;
+}
+
+/* Existing Coordinators Modal Styles Remain the Same */
+.coordinators-container {
+  background: rgba(20, 20, 20, 0.9);
+  border-radius: 20px;
+  width: 400px;
+  padding: 30px;
+  box-shadow: 0 0 30px rgba(196, 41, 142, 0.5);
+  border: 1px solid rgba(196, 41, 142, 0.3);
+  text-align: center;
+}
+
+.coordinators-list {
+  margin-top: 20px;
+}
+
+.coordinator-item {
+  background: rgba(45, 3, 89, 0.5);
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Orbitron", sans-serif;
+}
+
+.close-coordinators {
+  background: linear-gradient(135deg, #8b0000, #ff4500);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}

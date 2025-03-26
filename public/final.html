@@ -6,6 +6,66 @@
     <title>thank you</title>
 </head>
 <body>
-    Thank You
+    <!-- Header from landing page -->
+    <header>
+        <div class="logo">
+            <span><img src="logo.png" alt="logo" /></span>
+        </div>
+        <div class="title">
+            <h1>Sinhgad</h1>
+            <h2>TECHTONIC 2K25</h2>
+        </div>
+    </header>    
+    <!-- Page title -->
+    <h1 class="page-title">Bamboozled</h1>
+
+    <div class="container">
+        <div class="final-content">
+          <h1 class="thank-you">Thank You for Playing!</h1>
+          <p class="description">The result will be declared soon. Stay tuned for the result!</p>
+          
+          <div class="feedback-box">
+            <h3>Your Feedback Is Important To US.</h3>
+            <h3>Share Your Feedback In </h3>
+            <button class="submit-btn"> Feedback Box </button>
+          </div>
+    
+          <button class="event-pictures-btn">Event Pictures</button>
+        </div>
+    
+        <button class="coordinators-btn">Coordinators</button>
+    
+        <!-- Event Pictures Modal -->
+        <div id="picturesModal">
+          <div class="pictures-container">
+            <h2>Event Gallery</h2>
+            <img id="galleryImage" class="gallery-image" src="" alt="Event Picture">
+            <div class="gallery-navigation">
+              <button class="nav-btn" id="prevBtn">Previous</button>
+              <button class="nav-btn" id="nextBtn">Next</button>
+            </div>
+            <button class="close-modal-btn" id="closeGalleryBtn">Close</button>
+          </div>
+        </div>
+    
+        <!-- Coordinators Modal (Existing) -->
+        <div id="coordinatorsModal">
+          <div class="coordinators-container">
+            <h2>Event Coordinators</h2>
+            <div class="coordinators-list">
+              <div class="coordinator-item">Pratik</div>
+              <div class="coordinator-item">Vitthal Kendre</div>
+              <div class="coordinator-item">Siddhesh Kane</div>
+              <div class="coordinator-item">Viraj Hawale</div>
+              <div class="coordinator-item">Sanket Mahurkar</div>
+              <div class="coordinator-item">Piyush</div>
+              <div class="coordinator-item">Sakshi Desai</div>
+            </div>
+            <button class="close-coordinators">Close</button>
+          </div>
+        </div>
+    </div>
+
 </body>
+<script src="./js/final.js"></script>
 </html>

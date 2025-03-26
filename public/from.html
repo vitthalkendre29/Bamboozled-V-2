@@ -83,6 +83,11 @@
             otherCollegeName = ""; // Clear otherCollegeName if not "Other"
         }
 
+        localStorage.setItem("playername", playerName);
+
+        // Retrieve and log the value
+        console.log("script1:", localStorage.getItem("playername"));
+
         let response = await fetch("https://bamboozled-v-2.vercel.app/data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
