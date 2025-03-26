@@ -139,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let timeLeft = 30; // 5 minutes in seconds
     let completedtime=timeLeft;
     let downloadAttempted = false;
+    let downloadAttemptedandretry=false;
     
     // Function to get a random item from an array
     function getRandomItem(arr) {
@@ -215,6 +216,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (timeLeft === 0) {
             if(!downloadAttempted){
                 disableInputAndDownload();
+            }else{
+                
             }
             window.location.href = "/final";
         } else {
@@ -260,7 +263,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         createFile();
     }
-
+    
 
 
     function createFile() {
