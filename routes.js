@@ -40,7 +40,8 @@ router.post("/data", async (req, res) => {
         const result = await collection.insertOne(newStudent);
 
         console.log("Registration Successful:", result.insertedId);
-        res.status(201).json({ message: "Registration Successful changes made here 2", studentId: result.insertedId });
+        // res.status(201).json({ message: "Registration Successful changes made here 2", studentId: result.insertedId });
+        res.redirect("https://bamboozled-v-2.vercel.app/bomboozled");
     } catch (error) {
         console.error("Database error:", error);
         res.status(500).json({ message: "Database error" });
