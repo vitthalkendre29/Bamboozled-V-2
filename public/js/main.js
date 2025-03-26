@@ -268,9 +268,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function createFile() {
         let transformedText = inputField.value;
+        let filenamechange=nameofplayer || "solution"
         let fileType = document.getElementById("fileType").value;
         let fileContent = "";
-        let filename = "solution." + fileType;
+        let filename = `${filenamechange}.` + fileType;
 
         let elapsedTime = completedtime - timeLeft; // Convert back to time elapsed
         let minutes = Math.floor(elapsedTime / 60);
