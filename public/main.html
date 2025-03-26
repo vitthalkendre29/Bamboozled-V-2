@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bamboozled - TECHTONIC 2K24</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body oncontextmenu="return false;">
+    <!-- Header from landing page -->
+    <header>
+        <div class="logo">
+            <span><img src="./images/logo.png" alt="logo" /></span>
+        </div>
+        <div class="title">
+            <h1>Sinhgad</h1>
+            <h2>TECHTONIC 2K25</h2>
+        </div>
+    </header>
+
+    <div>
+        <div class="calculator-icon" id="calculatorToggle">
+            <img src="./images/keys.png" alt="calculator">
+        </div>
+      
+        <!-- Calculator Modal -->
+        <div id="calculatorModal">
+            <div class="calculator-container">
+              <div class="calculator-close" >
+                <button id="calculatorClose">&times;</button>
+              </div>
+              <div class="calculator-display" id="calculatorDisplay">0</div>
+              <div class="calculator-buttons">
+                <button class="calculator-btn clear" data-value="clear">C</button>
+                <button class="calculator-btn operator" data-value="/">/</button>
+                <button class="calculator-btn" data-value="7">7</button>
+                <button class="calculator-btn" data-value="8">8</button>
+                <button class="calculator-btn" data-value="9">9</button>
+                <button class="calculator-btn operator" data-value="*">*</button>
+                <button class="calculator-btn" data-value="4">4</button>
+                <button class="calculator-btn" data-value="5">5</button>
+                <button class="calculator-btn" data-value="6">6</button>
+                <button class="calculator-btn operator" data-value="-">-</button>
+                <button class="calculator-btn" data-value="1">1</button>
+                <button class="calculator-btn" data-value="2">2</button>
+                <button class="calculator-btn" data-value="3">3</button>
+                <button class="calculator-btn operator" data-value="+">+</button>
+                <button class="calculator-btn" data-value="0">0</button>
+                <button class="calculator-btn" data-value=".">.</button>
+                <button class="calculator-btn operator" data-value="=">=</button>
+              </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Page title -->
+    <h1 class="page-title">Bamboozled</h1>
+    
+    <div class="container">
+        <!-- Left Section: Problem Statements -->
+        <div class="section left">
+            <h2>Coding Challenges</h2>
+            
+            <div id="problemContainer">
+                <!-- Problems will be inserted here dynamically -->
+            </div>
+        </div>
+        
+        <!-- Right Section: Timer, Input, File Selection & Download -->
+        <div class="section right">
+            <div class="timer-box">
+                <h2>Time Remaining</h2>
+                <span id="timer"></span>
+            </div>
+            
+            <p class="label">Solution :</p>
+            <textarea id="modifiedInput" placeholder="Start typing your solution here..." oncopy="return false" oncut="return false" onpaste="return false"></textarea>
+            
+            <div class="controls">
+                <label class="label" for="fileType">Output Format:</label>
+                <select id="fileType">
+                    <option value="txt">Text (.txt)</option>
+                    <option value="cpp">C++ (.cpp)</option>
+                    <option value="java">Java (.java)</option>
+                    <option value="js">JavaScript (.js)</option>
+                    <option value="py">Python (.py)</option>
+                </select>
+                
+                <button id="downloadBtn" onclick="createFile()">Download Solution</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="./js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          // Existing form script remains the same
+    
+          // Calculator functionality
+          const calculatorToggle = document.getElementById("calculatorToggle");
+          const calculatorModal = document.getElementById("calculatorModal");
+          const calculatorClose = document.getElementById("calculatorClose");
+          const calculatorDisplay = document.getElementById("calculatorDisplay");
+          const calculatorButtons = document.querySelectorAll(".calculator-btn");
+    
+          // Toggle calculator modal
+          calculatorToggle.addEventListener("click", () => {
+            calculatorModal.style.display = "flex";
+          });
+    
+          calculatorClose.addEventListener("click", () => {
+            calculatorModal.style.display = "none";
+          });
+    
+          // Calculator logic
+          let currentExpression = "0";
+          let justCalculated = false;
+    
+          calculatorButtons.forEach(button => {
+            button.addEventListener("click", () => {
+              const value = button.getAttribute("data-value");
+    
+              switch(value) {
+                case "clear":
+                  currentExpression = "0";
+                  justCalculated = false;
+                  break;
+                case "=":
+                  try {
+                    currentExpression = eval(currentExpression).toString();
+                    justCalculated = true;
+                  } catch(error) {
+                    currentExpression = "Error";
+                  }
+                  break;
+                default:
+                  if (currentExpression === "0" || justCalculated) {
+                    currentExpression = value;
+                    justCalculated = false;
+                  } else {
+                    currentExpression += value;
+                  }
+              }
+    
+              calculatorDisplay.textContent = currentExpression;
+            });
+          });
+    
+          // Close modal if clicked outside
+          calculatorModal.addEventListener("click", (event) => {
+            if (event.target === calculatorModal) {
+              calculatorModal.style.display = "none";
+            }
+          });
+        });
+      </script>
+    
+</body>
+</html>

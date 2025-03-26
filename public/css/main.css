@@ -1,0 +1,597 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap");
+        
+        :root {
+            --primary-color: #1c0f2d; /* Dark purple from landing page */
+            --secondary-color: #2d0359; /* Purple from landing page */
+            --accent-color: #c4298e; /* Pink from landing page */
+            --light-bg: #f8fafc;
+            --white: #FFFFFF;
+            --border-color: rgba(196, 41, 142, 0.3); /* Border color with landing page accent */
+            --text-primary: #FFFFFF;
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --success: #059669;
+            --error: #DC2626;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* Disable text selection */
+            font-family: "Exo 2", sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* Header styles from landing page */
+        header {
+            display: flex;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1300px;
+        }
+
+        .logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(196, 41, 142, 0.7);
+            animation: pulse 2s infinite;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .logo:before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(45deg);
+            top: -30px;
+            left: -100px;
+            animation: shine 3s infinite;
+        }
+
+        .title {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .title h1 {
+            font-family: "Orbitron", sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-left: 30px;
+        }
+
+        .title h2 {
+            font-family: "Orbitron", sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #2d0359, #c4298e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            animation: colorShift 5s infinite;
+            margin-left: 30px;
+
+        }
+        
+        /* Page title styles */
+        .page-title {
+            font-family: "Orbitron", sans-serif;
+            font-size: 68px;
+            font-weight: 900;
+            background: linear-gradient(90deg, #450787, #da2c9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            width: 90%;
+            height: 700px;
+            max-width: 1400px;
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(45, 3, 89, 0.5);
+            border: 1px solid var(--border-color);
+        }
+        
+        .section {
+            padding: 30px;
+        }
+        
+        .left {
+            flex: 1;
+            background: var(--primary-color);
+            color: var(--white);
+            overflow-y: auto; /* Add scrolling for overflow content */
+            max-height: 700px;
+        }
+        
+        /* Custom scrollbar for the problems section */
+        .left::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .left::-webkit-scrollbar-track {
+            background: rgba(45, 3, 89, 0.1);
+            border-radius: 4px;
+        }
+        
+        .left::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 4px;
+        }
+        
+        .right {
+            flex: 1;
+            background: rgba(20, 20, 20, 0.8);
+        }
+        
+        h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            font-family: "Orbitron", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .left h2 {
+            font-size: 32px;
+            color: var(--accent-color);
+            border-bottom: 1px solid rgba(196, 41, 142, 0.3);
+            padding-bottom: 12px;
+            position: sticky;
+            top: 0;
+            background: var(--primary-color);
+            z-index: 10;
+            padding-top: 10px;
+        }
+        
+        .problem-card {
+            background: rgba(45, 3, 89, 0.2);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-left: 3px solid var(--accent-color);
+        }
+        
+        .problem-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-family: "Orbitron", sans-serif;
+        }
+        
+        .problem-card p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        
+        /* Custom scrollbar for paragraphs */
+        .problem-card p::-webkit-scrollbar {
+            width: 5px;
+        }
+        
+        .problem-card p::-webkit-scrollbar-track {
+            background: rgba(45, 3, 89, 0.1);
+            border-radius: 3px;
+        }
+        
+        .problem-card p::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        .example {
+            background: rgba(20, 20, 20, 0.5);
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        
+        .timer-box {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            text-align: center;
+            border: 1px solid rgba(196, 41, 142, 0.3);
+            box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+        }
+        
+        #timer {
+            font-size: 32px;
+            font-weight: 600;
+            display: block;
+            margin-top: 15px;
+            color: var(--white);
+            font-family: "Orbitron", sans-serif;
+        }
+        
+        .label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 20px;
+            color: var(--accent-color);
+            font-weight: 600;
+            font-family: "Orbitron", sans-serif;
+        }
+
+        #fileType {
+            margin-top: -20px;
+        }
+        
+        textarea {
+            width: 100%;
+            height: 240px;
+            background: rgba(45, 3, 89, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 12px;
+            color: var(--white);
+            font-size: 16px;
+            font-family: 'Courier New', monospace;
+            resize: none;
+            margin-bottom: 20px;
+            transition: border-color 0.2s;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(196, 41, 142, 0.3);
+        }
+        
+        textarea::placeholder {
+            color: var(--text-secondary);
+        }
+        
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        select {
+            background: rgba(45, 3, 89, 0.2);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: var(--white);
+            font-size: 16px;
+            appearance: none;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 35px;
+        }
+        
+        select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(196, 41, 142, 0.3);
+        }
+        
+        button {
+            background: linear-gradient(135deg, #2d0359, #c4298e);
+            color: var(--white);
+            border: none;
+            border-radius: 30px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: "Orbitron", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(196, 41, 142, 0.4);
+        }
+        
+        button:before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            top: 0;
+            left: -100%;
+            transition: all 0.6s;
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(196, 41, 142, 0.6);
+        }
+        
+        button:hover:before {
+            left: 100%;
+        }
+        
+        button:active {
+            transform: translateY(-1px);
+        }
+        
+        button:disabled {
+            background: var(--text-secondary);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .note {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 14px;
+        }
+
+        /* New Calculator Styles */
+    .calculator-icon {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #2d0359, #c4298e);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 15px rgba(196, 41, 142, 0.4);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+  
+      .calculator-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(196, 41, 142, 0.6);
+      }
+  
+      .calculator-icon img {
+        width: 35px;
+        height: 35px;
+        filter: invert(1);
+      }
+  
+      #calculatorModal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      .calculator-container {
+        background: rgba(20, 20, 20, 0.9);
+        border-radius: 20px;
+        width: 300px;
+        padding: 20px;
+        box-shadow: 0 0 30px rgba(196, 41, 142, 0.5);
+        border: 1px solid rgba(196, 41, 142, 0.3);
+        animation: fadeIn 0.5s;
+      }
+  
+      .calculator-display {
+        background: rgba(45, 3, 89, 0.3);
+        border: 1px solid rgba(196, 41, 142, 0.5);
+        border-radius: 10px;
+        height: 60px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 15px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 24px;
+        color: #ffffff;
+      }
+  
+      .calculator-buttons {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+  
+      .calculator-btn {
+        background: linear-gradient(135deg, #2d0359, #c4298e);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 15px;
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+  
+      .calculator-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+        
+      }
+  
+      .calculator-btn.operator {
+        background: linear-gradient(135deg, #450787, #da2c9d);
+      }
+  
+      .calculator-btn.clear {
+        grid-column: span 3;
+        background: linear-gradient(135deg, #8b0000, #ff4500);
+      }
+  
+      .calculator-close {
+        position: absolute;
+        top: 32px;
+        right: 15px;
+        width: 50px;
+        height: 50px;
+        border: none;
+        background: linear-gradient(135deg, #2d0359, #c4298e);
+        border: none;
+        border-radius: 50%;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Orbitron", sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(196, 41, 142, 0.4);
+        z-index: 1000;
+      }
+  
+      .calculator-close button{
+        background-color: #008b8b01;
+        border: none;
+        color: white;
+        font-size: 6vh;
+        background: none;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+
+      .calculator-close:hover{
+        transform: scale(1.1);
+        box-shadow: 0 8px 25px rgba(196, 41, 142, 0.6);
+      }
+
+      .calculator-close button:hover {
+        color: #ff4500;
+      }
+        
+        /* Animation keyframes */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(196, 41, 142, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100px;
+            }
+            20% {
+                left: 100%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+        
+        @keyframes colorShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                width: 95%;
+                height: auto;
+            }
+            
+            .left {
+                max-height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .title h1 {
+                font-size: 24px;
+            }
+
+            .title h2 {
+                font-size: 28px;
+            }
+            
+            .page-title {
+                font-size: 26px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .logo {
+                margin-right: 0;
+                margin-bottom: 15px;
+                width: 100px;
+                height: 100px;
+            }
+        }

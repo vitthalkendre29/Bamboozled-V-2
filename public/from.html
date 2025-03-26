@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bamboozled Registration - TECHTONIC 2K25</title>
+  <link rel="stylesheet" href="./css/from.css">
+</head>
+<body>
+  <!-- Header from landing page -->
+  <header>
+    <div class="logo">
+        <span><img src="./images/logo.png" alt="logo" /></span>
+    </div>
+    <div class="title">
+        <h1>Sinhgad</h1>
+        <h2>TECHTONIC 2K25</h2>
+    </div>
+</header>
+
+<!-- Page title -->
+<h1 class="page-title">Bamboozled</h1>
+
+<div class="container">
+    <!-- Page title -->
+    <h1 class="form-title">Registration</h1>
+    <form action="http://localhost:3000/data" method="post" id="registrationForm">
+        <div class="form-group">
+            <label for="playerName" class="label">Player Name</label>
+            <input type="text" id="playerName" name="playerName" placeholder="Enter your full name" required>
+            <div id="playerNameError" class="error-message">Please enter a valid name</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="contactNumber" class="label">Contact Number</label>
+            <input type="tel" id="contactNumber" name="contactNumber" placeholder="Enter 10-digit mobile number" required>
+            <div id="contactNumberError" class="error-message">Please enter a valid 10-digit mobile number</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="emailAddress" class="label">Email Address</label>
+            <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your email address" required>
+            <div id="emailAddressError" class="error-message">Please enter a valid email address</div>
+        </div>
+        
+        <div class="form-group">
+            <label for="college" class="label">College Name</label>
+            <select id="college" name="college" required>
+                <option value="">Select College</option>
+                <option value="sinhgad">Sinhgad College of Engineering</option>
+                <option value="other">Other</option>
+            </select>
+            <div id="collegeError" class="error-message">Please select a college</div>
+        </div>
+        
+        <div id="otherCollegeGroup" class="form-group">
+            <label for="otherCollegeName" class="label">Other College Name</label>
+            <input type="text" id="otherCollegeName" name="otherCollegeName" placeholder="Enter your college name">
+            <div id="otherCollegeNameError" class="error-message">Please enter your college name</div>
+        </div>
+        
+        <button type="submit" onclick="handleSubmit()">Register</button>
+    </form>
+</div>
+
+  <script src="./js/from.js"></script>
+</body>
+
+<script>
+    function handleSubmit() {
+    // Submit the form
+    document.getElementById("registrationForm").submit();
+    window.location.href = "/bomboozled";
+}
+    document.getElementById("registrationForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+        let playerName = document.getElementById("playerName").value;
+        let contactNumber = document.getElementById("contactNumber").value;
+        let emailAddress = document.getElementById("emailAddress").value;
+        let college = document.getElementById("college").value;
+        let otherCollegeName = document.getElementById("otherCollegeName").value;
+        if (college !== "other") {
+            otherCollegeName = ""; // Clear otherCollegeName if not "Other"
+        }
+
+        let response = await fetch("http://localhost:3000/data", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
+    });
+
+        let result = await response.json();
+    });
+</script>
+</html>

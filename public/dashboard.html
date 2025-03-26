@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bamboozled - TECHTONIC 2K24</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Exo 2", sans-serif;
+      }
+
+      body {
+        background-color: #1c0f2d;
+        color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 150px; /* Fixed width */
+        height: 150px; /* Fixed height */
+        /* background-color: #C4298E;    */
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(196, 41, 142, 0.7);
+        animation: pulse 2s infinite;
+      }
+
+      .logo img {
+        width: 100%; /* Ensures the image scales to fit the container */
+        height: 100%; /* Ensures the image scales to fit the container */
+        object-fit: contain; /* Maintains aspect ratio without cropping */
+      }
+
+      /* Media query for smaller screens */
+      @media (max-width: 480px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .logo {
+          margin-right: 0;
+          margin-bottom: 15px;
+          width: 100px; /* Slightly smaller for mobile */
+          height: 100px; /* Slightly smaller for mobile */
+        }
+      }
+
+      .logo:before {
+        content: "";
+        position: absolute;
+        width: 150%;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(45deg);
+        top: -30px;
+        left: -100px;
+        animation: shine 3s infinite;
+      }
+
+      .logo span {
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+      }
+
+      .title {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .title h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .title h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 40px;
+        font-weight: 900;
+        background: linear-gradient(90deg, #2d0359, #c4298e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        animation: colorShift 5s infinite;
+      }
+
+      .hero {
+        position: relative;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(
+          135deg,
+          rgba(45, 3, 89, 0.2),
+          rgba(196, 41, 142, 0.2)
+        );
+        border-radius: 20px;
+        margin: 30px 0;
+        overflow: hidden;
+      }
+
+      .hero:before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(196, 41, 142, 0.2) 0%,
+          rgba(45, 3, 89, 0.1) 50%,
+          transparent 70%
+        );
+        top: -50%;
+        left: -50%;
+        animation: rotateGradient 20s linear infinite;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .hero h2 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 20px;
+        background: linear-gradient(90deg, #450787, #da2c9d);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+
+      .hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .content {
+        position: relative;
+        background: rgba(20, 20, 20, 0.8);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 50px;
+        border: 1px solid rgba(196, 41, 142, 0.3);
+        box-shadow: 0 0 30px rgba(45, 3, 89, 0.5);
+        animation: fadeIn 1s;
+      }
+
+      .content h3 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #c4298e;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .content p {
+        margin-bottom: 20px;
+        line-height: 1.7;
+        font-size: 16px;
+      }
+
+      .tech-lines {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .tech-line {
+        position: absolute;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          #2d0359,
+          #c4298e,
+          transparent
+        );
+        opacity: 0.4;
+        animation-name: techLine;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+
+      .tech-line:nth-child(1) {
+        top: 10%;
+        width: 80%;
+        left: 10%;
+        animation-duration: 20s;
+      }
+
+      .tech-line:nth-child(2) {
+        top: 30%;
+        width: 60%;
+        left: 20%;
+        animation-duration: 15s;
+        animation-delay: 2s;
+      }
+
+      .tech-line:nth-child(3) {
+        top: 70%;
+        width: 70%;
+        left: 15%;
+        animation-duration: 18s;
+        animation-delay: 1s;
+      }
+
+      .btn-next {
+        display: inline-block;
+        padding: 15px 40px;
+        background: linear-gradient(135deg, #2d0359, #c4298e);
+        color: white;
+        text-decoration: none;
+        font-family: "Orbitron", sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        margin-top: 20px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(196, 41, 142, 0.4);
+      }
+
+      .btn-next:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        top: 0;
+        left: -100%;
+        transition: all 0.6s;
+      }
+
+      .btn-next:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(196, 41, 142, 0.6);
+      }
+
+      .btn-next:hover:before {
+        left: 100%;
+      }
+
+      .btn-container {
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .highlight-box {
+        background: rgba(45, 3, 89, 0.2);
+        border-left: 4px solid #c4298e;
+        padding: 20px;
+        margin: 20px 0;
+        border-radius: 5px;
+      }
+
+      .highlight-box h4 {
+        font-family: "Orbitron", sans-serif;
+        color: #c4298e;
+        margin-bottom: 10px;
+      }
+
+      .round {
+        margin-bottom: 25px;
+      }
+
+      .round h4 {
+        font-family: "Orbitron", sans-serif;
+        color: #c4298e;
+        font-size: 20px;
+        margin-bottom: 10px;
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 25px rgba(196, 41, 142, 0.8);
+        }
+        100% {
+          box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+        }
+      }
+
+      @keyframes shine {
+        0% {
+          left: -100px;
+        }
+        20% {
+          left: 100%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
+
+      @keyframes techLine {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @keyframes rotateGradient {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes colorShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .title h1 {
+          font-size: 24px;
+        }
+
+        .title h2 {
+          font-size: 28px;
+        }
+
+        .hero h2 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 16px;
+        }
+
+        .content {
+          padding: 25px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .logo {
+          margin-right: 0;
+          margin-bottom: 15px;
+          width: 100px;
+          height: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">
+          <span><img src="./images/logo.png" alt="logo" /></span>
+        </div>
+        <div class="title">
+          <h1>Sinhgad</h1>
+          <h2>TECHTONIC 2K25</h2>
+        </div>
+      </header>
+
+      <div class="hero">
+        <div class="tech-lines">
+          <div class="tech-line"></div>
+          <div class="tech-line"></div>
+          <div class="tech-line"></div>
+        </div>
+        <div class="hero-content">
+          <h2>Bamboozled</h2>
+          <p>
+            Are you ready to test your coding skills with a twist? Type code
+            with shuffled keys and crack the formula!
+          </p>
+        </div>
+      </div>
+
+      <div class="content">
+        <h3>Challenge Overview</h3>
+        <p>
+          Welcome to Bamboozled, a unique coding challenge event at TECHTONIC
+          2K25 where your typing skills and problem-solving abilities will be
+          put to the ultimate test!
+        </p>
+
+        <div class="highlight-box">
+          <h4>The Twist</h4>
+          <p>
+            In this challenge, the ASCII values of keyboard keys are formulated
+            and shuffled. You won't know which key is mapped to which value, but
+            you'll be provided with hints about the formula used for shuffling.
+            Can you decode the pattern and complete the tasks?
+          </p>
+        </div>
+
+        <h3>Competition Format</h3>
+        <p>
+          This one-day competition features progressively difficult rounds
+          where participants must type code using a special-purpose keyboard
+          with shuffled keys:
+        </p>
+
+        <div class="round">
+          <h4>ROUND 1: The Warmup</h4>
+          <p>
+            Type one specified line of Python/C code in just 10 minutes using
+            the shuffled keyboard. Those who complete the task correctly will
+            advance to the next round.
+          </p>
+        </div>
+
+        <div class="round">
+          <h4>ROUND 2: Ultimate Test</h4>
+          <p>
+            The difficulty increases as you must type a small code snippet
+            without any spelling or syntax errors within 15 minutes. Successful
+            participants will proceed to the final round.
+          </p>
+        </div>
+
+        <h3>Prizes</h3>
+        <p>First Prize: Rs.1500/- | Second Prize: Rs.750/-</p>
+
+        <div class="highlight-box">
+          <h4>Important Notes</h4>
+          <p>
+            All participants must bring their receipt and valid I-cards.
+            Scientific calculators are permitted. The organizers' decision will
+            be final in all matters.
+          </p>
+          <p>
+            Any attempt to copy, paste, or engage in any form of cheating will result in immediate elimination
+          </p>
+        </div>
+
+        <div class="btn-container">
+          <a href="/register" class="btn-next">Continue ></a>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add animation for elements appearing as they scroll into view
+      document.addEventListener("DOMContentLoaded", function () {
+        const content = document.querySelector(".content");
+        const rounds = document.querySelectorAll(".round");
+        const highlights = document.querySelectorAll(".highlight-box");
+
+        // Set initial opacity
+        rounds.forEach((round) => {
+          round.style.opacity = "0";
+          round.style.transform = "translateY(20px)";
+          round.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        });
+
+        highlights.forEach((highlight) => {
+          highlight.style.opacity = "0";
+          highlight.style.transform = "translateY(20px)";
+          highlight.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+        });
+
+        // Function to check if element is in viewport
+        function isInViewport(element) {
+          const rect = element.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <=
+              (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <=
+              (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+
+        // Function to handle scroll
+        function handleScroll() {
+          rounds.forEach((round) => {
+            if (isInViewport(round) && round.style.opacity === "0") {
+              setTimeout(() => {
+                round.style.opacity = "1";
+                round.style.transform = "translateY(0)";
+              }, 100);
+            }
+          });
+
+          highlights.forEach((highlight) => {
+            if (isInViewport(highlight) && highlight.style.opacity === "0") {
+              setTimeout(() => {
+                highlight.style.opacity = "1";
+                highlight.style.transform = "translateY(0)";
+              }, 100);
+            }
+          });
+        }
+
+        // Listen for scroll events
+        window.addEventListener("scroll", handleScroll);
+
+        // Initial check
+        handleScroll();
+
+        // Button hover effect
+        const btn = document.querySelector(".btn-next");
+        btn.addEventListener("mouseover", function () {
+          this.style.transform = "translateY(-3px)";
+          this.style.boxShadow = "0 8px 25px rgba(196, 41, 142, 0.6)";
+        });
+
+        btn.addEventListener("mouseout", function () {
+          this.style.transform = "translateY(0)";
+          this.style.boxShadow = "0 5px 15px rgba(196, 41, 142, 0.4)";
+        });
+      });
+    </script>
+  </body>
+</html>
