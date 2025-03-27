@@ -108,133 +108,133 @@ const equationProblems = [
       "id": 1,
       "title": "Smallest Digit Finder",
       "description": "Write a program to find the smallest digit in a number.",
-      "example": "Input: n = 295 → Output: 2",
+      "example": "Input: n = 295 ",
       "answer": 2
     },
     {
       "id": 2,
       "title": "Largest Digit Finder",
       "description": "Write a program to find the largest digit in a number.",
-      "example": "Input: n = 682 → Output: 8",
+      "example": "Input: n = 682 ",
       "answer": 8
     },
     {
       "id": 3,
       "title": "Count Digits",
       "description": "Write a program to count the number of digits in a number.",
-      "example": "Input: n = 5432 → Output: 4",
+      "example": "Input: n = 5432 ",
       "answer": 4
     },
     {
       "id": 4,
       "title": "Sum of First N Natural Numbers",
       "description": "Write a program to find the sum of the first N natural numbers.",
-      "example": "Input: n = 5 → Output: 15",
+      "example": "Input: n = 5 ",
       "answer": 15
     },
     {
       "id": 5,
       "title": "Multiplication Table Finder",
       "description": "Write a program to find the 3rd multiple of a given number.",
-      "example": "Input: n = 4 → Output: 12",
+      "example": "Input: n = 4 ",
       "answer": 12
     },
     {
       "id": 6,
       "title": "Difference Between Largest and Smallest Digit",
       "description": "Write a program to find the difference between the largest and smallest digit in a number.",
-      "example": "Input: n = 938 → Output: 6",
+      "example": "Input: n = 938 ",
       "answer": 6
     },
     {
       "id": 7,
       "title": "Last Digit Finder",
       "description": "Write a program to find the last digit of a number.",
-      "example": "Input: n = 987 → Output: 7",
+      "example": "Input: n = 987 ",
       "answer": 7
     },
     {
       "id": 8,
       "title": "First Digit Finder",
       "description": "Write a program to find the first digit of a number.",
-      "example": "Input: n = 754 → Output: 7",
+      "example": "Input: n = 754 ",
       "answer": 7
     },
     {
       "id": 9,
       "title": "Number of Factors",
       "description": "Write a program to count the number of factors of a number.",
-      "example": "Input: n = 10 → Output: 4",
+      "example": "Input: n = 10 ",
       "answer": 4
     },
     {
       "id": 10,
       "title": "Second Largest Digit Finder",
       "description": "Write a program to find the second largest digit in a number.",
-      "example": "Input: n = 456 → Output: 5",
+      "example": "Input: n = 456 ",
       "answer": 5
     },
     {
       "id": 11,
       "title": "Product of Digits",
       "description": "Write a program to find the product of the digits of a number.",
-      "example": "Input: n = 234 → Output: 24",
+      "example": "Input: n = 234 ",
       "answer": 24
     },
     {
       "id": 12,
       "title": "Sum of Even Digits",
       "description": "Write a program to find the sum of even digits in a number.",
-      "example": "Input: n = 1234 → Output: 6",
+      "example": "Input: n = 1234 ",
       "answer": 6
     },
     {
       "id": 13,
       "title": "Sum of Odd Digits",
       "description": "Write a program to find the sum of odd digits in a number.",
-      "example": "Input: n = 1234 → Output: 4",
+      "example": "Input: n = 1234 ",
       "answer": 4
     },
     {
       "id": 14,
       "title": "Count Odd Digits",
       "description": "Write a program to count the number of odd digits in a number.",
-      "example": "Input: n = 13579 → Output: 5",
+      "example": "Input: n = 13579 ",
       "answer": 5
     },
     {
       "id": 15,
       "title": "Count Even Digits",
       "description": "Write a program to count the number of even digits in a number.",
-      "example": "Input: n = 2468 → Output: 4",
+      "example": "Input: n = 2468 ",
       "answer": 4
     },
     {
       "id": 16,
       "title": "Find the 4th Power of a Number",
       "description": "Write a program to find the 4th power of a given number.",
-      "example": "Input: n = 2 → Output: 16",
+      "example": "Input: n = 2 ",
       "answer": 16
     },
     {
       "id": 17,
       "title": "Find the 3rd Power of a Number",
       "description": "Write a program to find the 3rd power of a given number.",
-      "example": "Input: n = 3 → Output: 27",
+      "example": "Input: n = 3 ",
       "answer": 27
     },
      {
       "id": 18,
       "title": "Sum of First and Last Digit",
       "description": "Write a program to find the sum of the first and last digit of a number.",
-      "example": "Input: n = 246 → Output: 8",
+      "example": "Input: n = 246 ",
       "answer": 8
     },
     {
       "id": 19,
       "title": "Subtract Last Digit from First Digit",
       "description": "Write a program to subtract the last digit from the first digit of a number.",
-      "example": "Input: n = 764 → Output: 3",
+      "example": "Input: n = 764 ",
       "answer": 3
     }
   ]
