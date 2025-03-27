@@ -56,8 +56,5 @@ router.post("/data", async (req, res) => {
     // Retrieve and log the value
     console.log("script1:", localStorage.getItem("playername"));
 
-    // res.status(201).json({ message: "Registration Successful changes made here 2", studentId: result.insertedId });
-    res.redirect("https://bamboozled-v-2.vercel.app/bomboozled");
-
 });
 module.exports = router;
