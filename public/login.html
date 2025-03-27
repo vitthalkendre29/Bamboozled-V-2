@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - TECHTONIC 2K25</title>
+  <link rel="stylesheet" href="./css/from.css">
+  <link rel="stylesheet" href="./css/login.css">
+</head>
+<body>
+  <!-- Header from landing page -->
+  <header>
+    <div class="logo">
+        <span><img src="./images/logo.png" alt="logo" /></span>
+    </div>
+    <div class="title">
+        <h1>Sinhgad</h1>
+        <h2>TECHTONIC 2K25</h2>
+    </div>
+  </header>
+
+  <!-- Page title -->
+  <h1 class="page-title">Bamboozled</h1>
+
+  <div class="container">
+    <h1 class="form-title">Login</h1>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="loginEmail" class="label">Email Address</label>
+        <input type="email" id="loginEmail" name="loginEmail" placeholder="Enter your email address" required>
+        <div id="loginEmailError" class="error-message">Please enter a valid email address</div>
+      </div>
+      
+      <div class="form-group">
+        <label for="loginContactNumber" class="label">Contact Number</label>
+        <input type="tel" id="loginContactNumber" name="loginContactNumber" placeholder="Enter 10-digit mobile number" required>
+        <div id="loginContactNumberError" class="error-message">Please enter a valid 10-digit mobile number</div>
+      </div>
+      
+      <button type="submit">Login</button>
+      <div class="login-links">
+        <a href="/register" class="form-link">Not registered? Sign up</a>
+      </div>
+    </form>
+  </div>
+
+  <script src="./js/login.js"></script>
+</body>
+</html>

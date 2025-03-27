@@ -5,7 +5,7 @@ const { connectDB, closeDBConnection } = require("./db");// Import the database 
 const checkUserRegistration = require("./middleware/checkUserRegistration.js")
 
 // Serve static HTML pages
-router.get("/bomboozled", checkUserRegistration, (req, res) => {
+router.get("/bomboozled", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
@@ -20,6 +20,45 @@ router.get("/", (req, res) => {
 router.get("/final", checkUserRegistration, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "final.html"));
 });
+
+router.get("/loginpage", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+router.post("/login", async (req, res) => {
+
+    const { email, contactNumber } = req.body;
+
+    if (!email || !contactNumber) {
+        return res.status(400).json({ message: "Email and contact number are required" });
+    }
+
+    try {
+        const { collection } = await connectDB();
+
+        // Find user by email and contact number
+        const user = await collection.findOne({ 
+            email: email, 
+            contactno: contactNumber 
+        });
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found. Please register or check your details." });
+        }
+
+        // Successful login
+        res.status(200).json({
+            message: "Login Successful",
+            name: user.name,
+            redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
+        });
+
+    } catch (error) {
+        console.error("Login error:", error);
+        res.status(500).json({ message: "Server error during login" });
+        }
+});
+
 
 // Handle form submission
 router.post("/data", async (req, res) => {
