@@ -66,35 +66,95 @@
   <script src="./js/from.js"></script>
 </body>
 
+
 <script>
-    function handleSubmit() {
-    // Submit the form
-    document.getElementById("registrationForm").submit();
-    // window.location.href = "https://bamboozled-v-2.vercel.app/bomboozled";
-}
     document.getElementById("registrationForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-        let playerName = document.getElementById("playerName").value;
-        let contactNumber = document.getElementById("contactNumber").value;
-        let emailAddress = document.getElementById("emailAddress").value;
+        event.preventDefault(); // Prevent default submission
+
+        let playerName = document.getElementById("playerName").value.trim();
+        let contactNumber = document.getElementById("contactNumber").value.trim();
+        let emailAddress = document.getElementById("emailAddress").value.trim();
         let college = document.getElementById("college").value;
-        let otherCollegeName = document.getElementById("otherCollegeName").value;
+        let otherCollegeName = document.getElementById("otherCollegeName").value.trim();
+
+        // Show "Other College" input only if "Other" is selected
         if (college !== "other") {
-            otherCollegeName = ""; // Clear otherCollegeName if not "Other"
+            otherCollegeName = "";
         }
 
         localStorage.setItem("playername", playerName);
-
-        // Retrieve and log the value
         console.log("script1:", localStorage.getItem("playername"));
 
+        let isValid = true;
+
+        // Validation for Player Name
+        const playerNameError = document.getElementById('playerNameError');
+        const nameRegex = /^[A-Za-z\s]{3,50}$/;
+        if (!nameRegex.test(playerName)) {
+            playerNameError.style.display = 'block';
+            isValid = false;
+        } else {
+            playerNameError.style.display = 'none';
+        }
+
+        // Validation for Contact Number
+        const contactNumberError = document.getElementById('contactNumberError');
+        const phoneRegex = /^[6-9]\d{9}$/;
+        if (!phoneRegex.test(contactNumber)) {
+            contactNumberError.style.display = 'block';
+            isValid = false;
+        } else {
+            contactNumberError.style.display = 'none';
+        }
+
+        // Validation for Email Address
+        const emailAddressError = document.getElementById('emailAddressError');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailAddress)) {
+            emailAddressError.style.display = 'block';
+            isValid = false;
+        } else {
+            emailAddressError.style.display = 'none';
+        }
+
+        // Validation for College Selection
+        const collegeError = document.getElementById('collegeError');
+        if (college === '') {
+            collegeError.style.display = 'block';
+            isValid = false;
+        } else {
+            collegeError.style.display = 'none';
+        }
+
+        // Validation for Other College Name (if applicable)
+        const otherCollegeNameError = document.getElementById('otherCollegeNameError');
+        if (college === 'other' && otherCollegeName === '') {
+            otherCollegeNameError.style.display = 'block';
+            isValid = false;
+        } else {
+            otherCollegeNameError.style.display = 'none';
+        }
+
+        // Stop form submission if validation fails
+        if (!isValid) {
+            return;
+        }
+
+        // Send form data to backend
         let response = await fetch("https://bamboozled-v-2.vercel.app/data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
-    });
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
+        });
 
         let result = await response.json();
+        
+        if (response.ok) {
+            console.log("You are registered.");
+            ;
+        } else {
+            alert("Registration failed: " + result.message);
+        }
     });
 </script>
 </html>
