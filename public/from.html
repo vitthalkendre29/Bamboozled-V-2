@@ -148,10 +148,12 @@
         });
 
         let result = await response.json();
-
-        window.location.href = "https://bamboozled-v-2.vercel.app/bomboozled";
         
-        
+        if (response.ok) {
+            window.location.href = result.redirectUrl;  // Use the redirect URL from server
+        } else {
+            alert("Registration failed: " + result.message);
+        }
     });
 </script>
 </html>
