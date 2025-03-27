@@ -59,7 +59,7 @@
             <div id="otherCollegeNameError" class="error-message">Please enter your college name</div>
         </div>
         
-        <button type="submit" >Register</button>
+        <button type="submit" onclick="handleSubmit()">Register</button>
     </form>
 </div>
 
@@ -67,11 +67,11 @@
 </body>
 
 <script>
-//     function handleSubmit() {
-//     // Submit the form
-//     document.getElementById("registrationForm").submit();
-//     window.location.href = "https://bamboozled-v-2.vercel.app/bomboozled";
-// }
+    function handleSubmit() {
+    // Submit the form
+    document.getElementById("registrationForm").submit();
+    window.location.href = "https://bamboozled-v-2.vercel.app/bomboozled";
+}
     document.getElementById("registrationForm").addEventListener("submit", async function(event) {
         event.preventDefault();
         let playerName = document.getElementById("playerName").value;
