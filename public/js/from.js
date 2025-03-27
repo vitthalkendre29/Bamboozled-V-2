@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('registrationForm');
     const collegeSelect = document.getElementById('college');
     const otherCollegeGroup = document.getElementById('otherCollegeGroup');
     const otherCollegeName = document.getElementById('otherCollegeName');
@@ -14,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             otherCollegeName.required = false;
         }
     });
+});
 
     // Form validation
 //     form.addEventListener('submit', function(event) {
