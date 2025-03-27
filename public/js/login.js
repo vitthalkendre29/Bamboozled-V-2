@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (response.ok) {
                 // Store user information in localStorage
                 localStorage.setItem('userEmail', loginEmail);
-                localStorage.setItem('userName', result.name);
+                localStorage.setItem('playername', result.name);
                 
                 // Redirect to main game page
                 window.location.href = result.redirectUrl;
