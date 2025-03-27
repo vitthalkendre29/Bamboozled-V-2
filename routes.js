@@ -2,9 +2,10 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 const { connectDB, closeDBConnection } = require("./db");// Import the database connection
+const checkUserRegistration = require("./middleware/checkUserRegistration.js")
 
 // Serve static HTML pages
-router.get("/bomboozled", (req, res) => {
+router.get("/bomboozled", checkUserRegistration, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
@@ -16,7 +17,7 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-router.get("/final", (req, res) => {
+router.get("/final", checkUserRegistration, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "final.html"));
 });
 
