@@ -105,28 +105,25 @@ const paragraphProblems = [
 
 const equationProblems = [
     {
-        id: 51,
-        title: "Linear Equation Solver",
-        description: "Write a program to solve a system of linear equations using Cramer's rule: ax + by = c and dx + ey = f.",
-        example: "Input: a=2, b=3, c=8, d=1, e=1, f=4 → Output: x=1, y=2"
+        id: 1,
+        title: "Prime Number Checker",
+        description: "Write a program to check whether a given number is prime",
+        example: "Input: n = 7 → Output: Yes",
+        answer: 1
     },
     {
         id: 2,
-        title: "Quadratic Equation Solver",
-        description: "Write a program to find the roots of a quadratic equation ax² + bx + c = 0 using the quadratic formula.",
-        example: "Input: a=1, b=-5, c=6 → Output: x=2, x=3"
+        title: "Count Vowels in a String",
+        description: "Write a program to count the number of vowels in a given string.",
+        example: "Input: str = 'education' → Output: 5",
+        answer: 2
     },
     {
         id: 3,
-        title: "Matrix Multiplication",
-        description: "Write a program to multiply two matrices A and B and return the resulting matrix C.",
-        example: "Input: A=[[1,2],[3,4]], B=[[5,6],[7,8]] → Output: C=[[19,22],[43,50]]"
-    },
-    {
-        id: 4,
-        title: "Differential Equation",
-        description: "Write a program to solve the first-order ordinary differential equation dy/dx = f(x,y) using the Euler method.",
-        example: "Input: dy/dx = x + y, y(0) = 1, step size = 0.1, interval [0,1] → Output: y(1) ≈ 4.7"
+        title: "String Length Finder",
+        description: "Write a program to find the length of a given string.",
+        example: "Input: str = 'hello' → Output: 5",
+        answer:3
     }
 ];
 
@@ -135,7 +132,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("playername:", nameofplayer);
     const inputField = document.getElementById("modifiedInput");
     let currentLevel = 1; // Default to level 1
-    const ASCII_SHIFT = 3;
     let timeLeft = 30; // 5 minutes in seconds
     let completedtime=timeLeft;
     let downloadAttempted = false;
@@ -186,6 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error("Invalid level! Choose 1 or 2.");
         }
     };
+    const ASCII_SHIFT = randomEquationProblem.answer;
 
     function transformCharacter(char, level) {
         if (level === 1) {
