@@ -30,11 +30,6 @@ router.post("/data", async (req, res) => {
         return res.status(400).json({ message: "All fields are required" });
     }
 
-    localStorage.setItem("playername", playerName);
-
-    // Retrieve and log the value
-    console.log("script1:", localStorage.getItem("playername"));
-
     try {
         const { collection } = await connectDB();
 
@@ -55,5 +50,11 @@ router.post("/data", async (req, res) => {
         console.error("Database error:", error);
         res.status(500).json({ message: "Database error" });
     }
+
+    localStorage.setItem("playername", playerName);
+
+    // Retrieve and log the value
+    console.log("script1:", localStorage.getItem("playername"));
+
 });
 module.exports = router;
