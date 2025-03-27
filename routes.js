@@ -17,7 +17,7 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-router.get("/final", checkUserRegistration, (req, res) => {
+router.get("/final", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "final.html"));
 });
 
