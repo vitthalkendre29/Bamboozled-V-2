@@ -84,8 +84,6 @@ router.post("/data", async (req, res) => {
         const result = await collection.insertOne(newStudent);
 
         console.log("Registration Successful:", result.insertedId);
-        // res.status(201).json({ message: "Registration Successful changes made here 2", studentId: result.insertedId });
-        // res.redirect("https://bamboozled-v-2.vercel.app/bomboozled");
         res.status(201).json({
             message: "Registration Successful",
             studentId: result.insertedId,
@@ -97,10 +95,6 @@ router.post("/data", async (req, res) => {
         res.status(500).json({ message: "Database error" });
     }
 
-    localStorage.setItem("playername", playerName);
-
-    // Retrieve and log the value
-    console.log("script1:", localStorage.getItem("playername"));
 
 });
 module.exports = router;
