@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     loginForm.addEventListener('submit', async function(event) {
         event.preventDefault();
 
+        let submitButton = event.target.querySelector("button[type='submit']");
+        submitButton.disabled = true; // Disable button to prevent multiple submissions
+        submitButton.innerText = "Registering..."; // Change text to indicate progress
+
         let loginEmail = document.getElementById('loginEmail').value.trim();
         let loginContactNumber = document.getElementById('loginContactNumber').value.trim();
 
@@ -32,6 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Stop if validation fails
         if (!isValid) {
+            submitButton.disabled = false; // Re-enable button if validation fails
+            submitButton.innerText = "Register"; 
             return;
         }
 
@@ -54,10 +60,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 window.location.href = result.redirectUrl;
             } else {
                 alert(result.message || "Login failed");
+                submitButton.disabled = false; // Re-enable button if registration fails
+                submitButton.innerText = "Register";
             }
         } catch (error) {
             console.error("Login error:", error);
             alert("An error occurred during login");
+            submitButton.disabled = false; // Re-enable button on error
+            submitButton.innerText = "Register";
         }
     });
 });
