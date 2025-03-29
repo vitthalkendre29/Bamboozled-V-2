@@ -237,10 +237,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const equationCard = document.createElement('div');
     equationCard.className = 'problem-card';
     equationCard.innerHTML = `
-        <h3>Problem ${randomEquationProblem.id}: ${randomEquationProblem.title}</h3>
+        <h3>Clue ${randomEquationProblem.id}: ${randomEquationProblem.title}</h3>
         <p>${randomEquationProblem.description}</p>
         <div class="given">
-            <p><strong>given:</strong> ${randomEquationProblem.given}</p>
+            <p><strong>Input:</strong> ${randomEquationProblem.given}</p>
         </div>
     `;
     problemContainer.appendChild(equationCard);
