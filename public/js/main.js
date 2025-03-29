@@ -38,7 +38,7 @@ const paragraphProblems = [
     {
         id: 8,
         title: "Self-Healing Materials",
-        description: "Imagine materials that can repair themselves when damaged—this is the promise of self-healing materials. Inspired by natural processes like how human skin heals after an injury, these materials are designed to automatically restore their structure when cracked or broken. Such materials could revolutionize industries like construction, electronics, and aerospace. For example, self-healing materials could be used in smartphones, repairing their own cracks, or in airplanes, where the wings could regenerate during flight, improving safety and reducing maintenance costs. As the technology progresses, these materials could lead to a world where objects last longer, waste is reduced, and repair costs are significantly lowered."
+        description: "Imagine materials that can repair themselves when damaged—this is the promise of self-healing materials. Inspired by natural processes like how human skin heals after an injury, these materials are designed to automatically restore their structure when cracked or broken. Such materials could revolutionize industries like construction, electronics, and aerospace. For given, self-healing materials could be used in smartphones, repairing their own cracks, or in airplanes, where the wings could regenerate during flight, improving safety and reducing maintenance costs. As the technology progresses, these materials could lead to a world where objects last longer, waste is reduced, and repair costs are significantly lowered."
     },
     {
         id: 9,
@@ -78,133 +78,133 @@ const equationProblems = [
       "id": 1,
       "title": "Clue #1: Find the smallest digit in a number",
       "description": "Find the smallest digit in a given number and square to that number.",
-      "example": "Input: n = 295 ",
+      "given": "Input: n = 295 ",
       "answer": 4
     },
     {
       "id": 2,
       "title": "Clue #2: Find the largest digit in a number",
       "description": "Find the largest digit in a given number.",
-      "example": "Input: n = 682 ",
+      "given": "Input: n = 682 ",
       "answer": 8
     },
     {
       "id": 3,
       "title": "Clue #3: Count the number of digits in a number",
       "description": "Count how many digits are in a given number.",
-      "example": "Input: n = 543278 ",
+      "given": "Input: n = 543278 ",
       "answer": 6
     },
     {
       "id": 4,
       "title": "Clue #4: Find the sum of the first N natural numbers",
       "description": "Find the sum of the first N natural numbers.",
-      "example": "Input: n = 5 ",
+      "given": "Input: n = 5 ",
       "answer": 15
     },
     {
       "id": 5,
       "title": "Clue #5: Find the 3rd multiple of a given number",
       "description": "Find the 3rd multiple of the given number.",
-      "example": "Input: n = 4 ",
+      "given": "Input: n = 4 ",
       "answer": 12
     },
     {
       "id": 6,
       "title": "Clue #6: Find the difference between the largest and smallest digit",
       "description": "Find the difference between the largest and smallest digit in the number.",
-      "example": "Input: n = 938 ",
+      "given": "Input: n = 938 ",
       "answer": 6
     },
     {
       "id": 7,
       "title": "Clue #7: Find the last digit of a number",
       "description": "Find the last digit of the given number.",
-      "example": "Input: n = 987 ",
+      "given": "Input: n = 987 ",
       "answer": 7
     },
     {
       "id": 8,
       "title": "Clue #8: Find the first digit of a number",
       "description": "Find the first digit of the given number.",
-      "example": "Input: n = 754 ",
+      "given": "Input: n = 754 ",
       "answer": 7
     },
     {
       "id": 9,
       "title": "Clue #9: Count the number of factors of a number",
       "description": "Count how many factors the given number has.",
-      "example": "Input: n = 10 ",
+      "given": "Input: n = 10 ",
       "answer": 4
     },
     {
       "id": 10,
       "title": "Clue #10: Find the second largest digit in a number",
       "description": "Find the second largest digit in the number.",
-      "example": "Input: n = 456 ",
+      "given": "Input: n = 456 ",
       "answer": 5
     },
     {
       "id": 11,
       "title": "Clue #11: Find the product of the digits of a number",
       "description": "Find the product of the digits in the number.",
-      "example": "Input: n = 234 ",
+      "given": "Input: n = 234 ",
       "answer": 24
     },
     {
       "id": 12,
       "title": "Clue #12: Find the sum of even digits in a number",
       "description": "Find the sum of all even digits in the number.",
-      "example": "Input: n = 1234 ",
+      "given": "Input: n = 1234 ",
       "answer": 6
     },
     {
       "id": 13,
       "title": "Clue #13: Find the sum of odd digits in a number",
       "description": "Find the sum of all odd digits in the number.",
-      "example": "Input: n = 1234 ",
+      "given": "Input: n = 1234 ",
       "answer": 4
     },
     {
       "id": 14,
       "title": "Clue #14: Count the number of odd digits in a number",
-      "description": "Count how many odd digits are in the number.",
-      "example": "Input: n = 13579 ",
-      "answer": 5
+      "description": "Count how many odd digits are in the number and square to it.",
+      "given": "Input: n = 13579 ",
+      "answer": 25
     },
     {
       "id": 15,
       "title": "Clue #15: Count the number of even digits in a number",
       "description": "Count how many even digits are in the number.",
-      "example": "Input: n = 2468 ",
+      "given": "Input: n = 2468 ",
       "answer": 4
     },
     {
       "id": 16,
       "title": "Clue #16: Find the 4th power of a given number",
-      "description": "Find the 4th power of the given number.",
-      "example": "Input: n = 2 ",
-      "answer": 16
+      "description": "Find the 4th power of the given number and squareroot of the answer.",
+      "given": "Input: n = 2 ",
+      "answer": 4
     },
     {
       "id": 17,
       "title": "Clue #17: Find the 3rd power of a given number",
       "description": "Find the 3rd power of the given number.",
-      "example": "Input: n = 3 ",
+      "given": "Input: n = 3 ",
       "answer": 27
     },
     {
       "id": 18,
       "title": "Clue #18: Find the sum of the first and last digit",
       "description": "Find the sum of the first and last digit of the number.",
-      "example": "Input: n = 246 ",
+      "given": "Input: n = 246 ",
       "answer": 8
     },
     {
       "id": 19,
       "title": "Clue #19: Subtract the last digit from the first digit",
       "description": "Subtract the last digit from the first digit of the number.",
-      "example": "Input: n = 764 ",
+      "given": "Input: n = 764 ",
       "answer": 3
     }
 ];
@@ -239,8 +239,8 @@ document.addEventListener("DOMContentLoaded", function () {
     equationCard.innerHTML = `
         <h3>Problem ${randomEquationProblem.id}: ${randomEquationProblem.title}</h3>
         <p>${randomEquationProblem.description}</p>
-        <div class="example">
-            <p><strong>Example:</strong> ${randomEquationProblem.example}</p>
+        <div class="given">
+            <p><strong>given:</strong> ${randomEquationProblem.given}</p>
         </div>
     `;
     problemContainer.appendChild(equationCard);
