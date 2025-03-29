@@ -75,6 +75,10 @@
     document.getElementById("registrationForm").addEventListener("submit", async function(event) {
         event.preventDefault(); // Prevent default submission
 
+        let submitButton = event.target.querySelector("button[type='submit']");
+        submitButton.disabled = true; // Disable button to prevent multiple submissions
+        submitButton.innerText = "Registering..."; // Change text to indicate progress
+
         let playerName = document.getElementById("playerName").value.trim();
         let contactNumber = document.getElementById("contactNumber").value.trim();
         let emailAddress = document.getElementById("emailAddress").value.trim();
@@ -141,6 +145,8 @@
 
         // Stop form submission if validation fails
         if (!isValid) {
+            submitButton.disabled = false; // Re-enable button if validation fails
+            submitButton.innerText = "Register"; 
             return;
         }
 
@@ -149,18 +155,26 @@
         // Retrieve and log the value
         console.log("Player Name:", localStorage.getItem("playername"));
         // Send form data to backend
-        let response = await fetch("https://bamboozled-v-2.vercel.app/data", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
-        });
-
-        let result = await response.json();
-        
-        if (response.ok) {
-            window.location.href = result.redirectUrl;  // Use the redirect URL from server
-        } else {
-            alert("Registration failed: " + result.message);
+        try {
+            let response = await fetch("https://bamboozled-v-2.vercel.app/data", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ playerName, contactNumber, emailAddress, college, otherCollegeName })
+            });
+    
+            let result = await response.json();
+            
+            if (response.ok) {
+                window.location.href = result.redirectUrl;  // Use the redirect URL from server
+            } else {
+                alert("Registration failed: " + result.message);
+                submitButton.disabled = false; // Re-enable button if registration fails
+                submitButton.innerText = "Register";
+            }
+        } catch (error) {
+            alert("An error occurred. Please try again later.");
+            submitButton.disabled = false; // Re-enable button on error
+            submitButton.innerText = "Register";
         }
     });
 </script>
