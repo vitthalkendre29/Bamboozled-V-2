@@ -1,15 +1,40 @@
 const express = require("express");
 const path = require("path");
 const router = express.Router();
-const { connectDB, closeDBConnection } = require("./db");// Import the database connection
-const checkUserRegistration = require("./middleware/checkUserRegistration.js")
+const session = require("express-session");
+const { connectDB, closeDBConnection } = require("./db");
+
+
+// Configure session middleware
+router.use(session({
+    secret: "vicky", // Change this to a strong secret key
+    resave: false,
+    saveUninitialized: true,
+}));
+
+// Middleware to check if user is authenticated
+function isAuthenticated(req, res, next) {
+    if (req.session.user) {
+        return next();
+    }
+    return res.status(403).json({ message: "Access denied. Please log in or register." });
+}
+
+// Middleware to prevent logged-in users from accessing login/register pages
+function preventAuthPages(req, res, next) {
+    if (req.session.user) {
+        return res.redirect("/bomboozled");
+    }
+    next();
+}
+
 
 // Serve static HTML pages
-router.get("/bomboozled", (req, res) => {
+router.get("/bomboozled",isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
-router.get("/register", (req, res) => {
+router.get("/register", preventAuthPages, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "from.html"));
 });
 
@@ -17,12 +42,21 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-router.get("/final", (req, res) => {
+router.get("/final",isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "final.html"));
 });
 
-router.get("/loginpage", (req, res) => {
+router.get("/loginpage",preventAuthPages, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+router.post("/logout", (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ message: "Logout failed" });
+        }
+        res.status(200).json({ message: "Logout successfulyy by vicky", redirectUrl: "/loginpage" });
+    });
 });
 
 router.post("/login", async (req, res) => {
@@ -45,6 +79,12 @@ router.post("/login", async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found. Please register or check your details." });
         }
+
+        // Store user session
+        req.session.user = {
+            name: user.name,
+            email: user.email
+        };
 
         // Successful login
         res.status(200).json({
@@ -84,6 +124,12 @@ router.post("/data", async (req, res) => {
         const result = await collection.insertOne(newStudent);
 
         console.log("Registration Successful:", result.insertedId);
+
+        req.session.user = {
+            name: playerName,
+            email: emailAddress
+        };
+
         res.status(201).json({
             message: "Registration Successful",
             studentId: result.insertedId,

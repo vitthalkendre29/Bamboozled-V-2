@@ -89,12 +89,30 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Feedback Submission
-    feedbackSubmitBtn.addEventListener("click", () => {
-      if (feedbackInput.value.trim() !== "") {
-        alert("Thank you for your feedback!");
-        feedbackInput.value = "";
-      } else {
-        alert("Please write your feedback before submitting.");
-      }
-    });
+    const logoutButton = document.querySelector(".userinfo");
+
+    if (logoutButton) {
+        logoutButton.addEventListener("click", async () => {
+            try {
+                const response = await fetch("/logout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = data.redirectUrl; // Redirect to login page
+                } else {
+                    alert("Logout failed. Please try again.");
+                }
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    }
   });
