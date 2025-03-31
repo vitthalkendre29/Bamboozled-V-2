@@ -68,6 +68,10 @@ function preventAuthPages(req, res, next) {
 }
 
 // Static page routes
+router.get("/instructions", isAuthenticated, trackLastPage, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "bamboozled-game-simplified.html"));
+});
+
 router.get("/bomboozled", isAuthenticated, trackLastPage, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "main.html"));
 });

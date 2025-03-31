@@ -644,7 +644,7 @@
     font-weight: 700;
     color: #ffffff;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    background: linear-gradient(90deg, #ffffff, #c4298e);
+    background: linear-gradient(90deg, #f37575, #f80d04);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 1px;
