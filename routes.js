@@ -107,7 +107,7 @@ router.post("/logout", async (req, res) => {
     console.log("Session destroyed and cookie cleared");
     res
       .status(200)
-      .json({ message: "Logout successful", redirectUrl: "/loginpage" });
+      .json({ message: "Logout successful", redirectUrl: "/" });
   });
 });
 
@@ -149,7 +149,7 @@ router.post("/login", async (req, res) => {
       res.status(200).json({
           message: "Login Successful",
           name: user.name,
-          redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
+          redirectUrl: "https://bamboozled-v-2.vercel.app/instructions"
       });
     });
   } catch (error) {
@@ -184,7 +184,7 @@ router.post("/data", async (req, res) => {
     res.status(201).json({
       message: "Registration Successful",
       studentId: result.insertedId,
-      redirectUrl: "/bomboozled", // Relative URL
+      redirectUrl: "/instructions", // Relative URL
     });
   } catch (error) {
     console.error("Database error:", error);
