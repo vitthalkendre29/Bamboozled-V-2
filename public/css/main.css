@@ -595,3 +595,96 @@
                 height: 100px;
             }
         }
+
+/* Player Banner Styles */
+.player-banner {
+    max-width: 1400px;
+    width: 40%;
+    margin: 20px 0 20px 7%;
+    padding: 15px 25px;
+    background: linear-gradient(135deg, rgba(45, 3, 89, 0.8), rgba(196, 41, 142, 0.8));
+    border-radius: 12px;
+    border: 1px solid var(--accent-color);
+    box-shadow: 0 5px 15px rgba(196, 41, 142, 0.4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    animation: pulse 3s infinite;
+}
+
+.player-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shine 5s infinite;
+}
+
+.player-welcome {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+.welcome-text {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-right: 5px;
+    font-weight: 900;
+}
+
+.player-name {
+    font-family: "Orbitron", sans-serif;
+    font-size: 190%;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(90deg, #ffffff, #c4298e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.player-message {
+    flex-grow: 1;
+    text-align: right;
+}
+
+.player-message p {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive styles for player banner */
+@media (max-width: 768px) {
+    .player-banner {
+        flex-direction: column;
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .player-welcome {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+    
+    .player-message {
+        text-align: center;
+    }
+    
+    .welcome-text {
+        font-size: 20px;
+    }
+    
+    .player-name {
+        font-size: 26px;
+    }
+}

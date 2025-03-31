@@ -217,6 +217,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let completedtime=timeLeft;
     let downloadAttempted = false;
     let downloadAttemptedandretry=false;
+
+    document.getElementById("playerName").innerText=nameofplayer;
     
     // Function to get a random item from an array
     function getRandomItem(arr) {
