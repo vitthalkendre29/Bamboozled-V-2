@@ -11,7 +11,7 @@ const MONGO_URI = "mongodb+srv://vicky:vicky123@autorest.xacrthx.mongodb.net";
 router.use(
   session({
     name: "bomboozledSession",
-    secret: "your_strong_secret_here", // Replace with a strong, random secret
+    secret: "vicky", // Replace with a strong, random secret
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({
@@ -118,17 +118,6 @@ router.post("/login", async (req, res) => {
       .json({ message: "Email and contact number are required" });
   }
 
-  // Basic email format validation
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return res.status(400).json({ message: "Invalid email format" });
-  }
-
-  // Contact number must be 10 digits
-  if (!/^\d{10}$/.test(contactNumber)) {
-    return res
-      .status(400)
-      .json({ message: "Contact number must be 10 digits" });
-  }
 
   try {
     const { collection } = await connectDB();
@@ -148,15 +137,15 @@ router.post("/login", async (req, res) => {
       email: user.email,
     };
 
-    req.session.save((err) => {
+    req.session.save(err => {
       if (err) {
-        console.error("Session save error:", err);
-        return res.status(500).json({ message: "Session error" });
+          console.error("Session save error:", err);
+          return res.status(500).json({ message: "Session error" });
       }
       res.status(200).json({
-        message: "Login Successful",
-        name: user.name,
-        redirectUrl: "/bomboozled", // Relative URL
+          message: "Login Successful",
+          name: user.name,
+          redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
       });
     });
   } catch (error) {
@@ -169,23 +158,6 @@ router.post("/login", async (req, res) => {
 router.post("/data", async (req, res) => {
   const { playerName, contactNumber, emailAddress, college, otherCollegeName } =
     req.body;
-
-  // Check for presence of required fields
-  if (!playerName || !contactNumber || !emailAddress || !college) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
-
-  // Basic email format validation
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
-    return res.status(400).json({ message: "Invalid email format" });
-  }
-
-  // Contact number must be 10 digits
-  if (!/^\d{10}$/.test(contactNumber)) {
-    return res
-      .status(400)
-      .json({ message: "Contact number must be 10 digits" });
-  }
 
   try {
     const { collection } = await connectDB();
@@ -204,7 +176,7 @@ router.post("/data", async (req, res) => {
       name: playerName,
       email: emailAddress,
     };
-
+``
     res.status(201).json({
       message: "Registration Successful",
       studentId: result.insertedId,
