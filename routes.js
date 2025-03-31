@@ -21,7 +21,7 @@ router.use(
       ttl: 24 * 60 * 60, // 1 day session expiration (86,400 seconds)
     }),
     cookie: {
-      secure: process.env.NODE_ENV === "production", // Secure in production
+      secure: false, // Secure in production
       httpOnly: true,
       sameSite: "lax",
     },
