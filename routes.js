@@ -2,46 +2,15 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 const session = require("express-session");
-const { connectDB } = require("./db");// Import the database connection
-const MongoStore = require("connect-mongo");
+const { connectDB, closeDBConnection } = require("./db");
 
 
-const MONGO_URI = "mongodb+srv://vicky:vicky123@autorest.xacrthx.mongodb.net";
-
-
+// Configure session middleware
 router.use(session({
-    name:"bomboozledSession",
-    secret: "vicky", // Use a strong secret key
+    secret: "vicky", // Change this to a strong secret key
     resave: false,
-    saveUninitialized: false,  // Ensure session is only created when needed
-    store: MongoStore.create({
-        mongoUrl: MONGO_URI,// Store sessions in MongoDB
-        dbName: "studentinfo",   
-        collectionName: "sessions",
-        ttl: 30*10, // 1 day session expiration
-    }),
-    cookie: {
-        secure: process.env.NODE_ENV === "production",  // Ensure this is false for localhost, true for HTTPS
-        httpOnly: true,
-        sameSite: "lax"
-    }
+    saveUninitialized: true,
 }));
-
-// Middleware to track last visited page
-function trackLastPage(req, res, next) {
-    if (req.session.user) {
-        req.session.lastPage = req.path;
-    }
-    next();
-}
-
-// Middleware to enforce returning to the last visited page
-function enforceLastPage(req, res, next) {
-    if (req.session.user && req.session.lastPage && req.path !== req.session.lastPage) {
-        return res.redirect(req.session.lastPage);
-    }
-    next();
-}
 
 // Middleware to check if user is authenticated
 function isAuthenticated(req, res, next) {
@@ -54,14 +23,14 @@ function isAuthenticated(req, res, next) {
 // Middleware to prevent logged-in users from accessing login/register pages
 function preventAuthPages(req, res, next) {
     if (req.session.user) {
-        return res.redirect(req.session.lastPage || "/bomboozled");
+        return res.redirect("/bomboozled");
     }
     next();
 }
 
 
 // Serve static HTML pages
-router.get("/bomboozled",isAuthenticated,trackLastPage, (req, res) => {
+router.get("/bomboozled",isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
@@ -73,7 +42,7 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-router.get("/final",isAuthenticated,trackLastPage, (req, res) => {
+router.get("/final",isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "final.html"));
 });
 
@@ -81,17 +50,12 @@ router.get("/loginpage",preventAuthPages, (req, res) => {
     res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-// Apply `enforceLastPage` middleware
-router.use(enforceLastPage);
-
-
-router.post("/logout", async (req, res) => {
+router.post("/logout", (req, res) => {
     req.session.destroy(err => {
         if (err) {
             return res.status(500).json({ message: "Logout failed" });
         }
-        res.clearCookie("bomboozledSession"); // Clear session cookie
-        res.status(200).json({ message: "Logout successful", redirectUrl: "/loginpage" });
+        res.status(200).json({ message: "Logout successfulyy by vicky", redirectUrl: "/loginpage" });
     });
 });
 
@@ -123,16 +87,10 @@ router.post("/login", async (req, res) => {
         };
 
         // Successful login
-        req.session.save(err => {
-            if (err) {
-                console.error("Session save error:", err);
-                return res.status(500).json({ message: "Session error" });
-            }
-            res.status(200).json({
-                message: "Login Successful",
-                name: user.name,
-                redirectUrl: "http://localhost:3000/bomboozled"
-            });
+        res.status(200).json({
+            message: "Login Successful",
+            name: user.name,
+            redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
         });
 
     } catch (error) {
@@ -175,8 +133,9 @@ router.post("/data", async (req, res) => {
         res.status(201).json({
             message: "Registration Successful",
             studentId: result.insertedId,
-            redirectUrl: "http://localhost:3000/bomboozled"
+            redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
         });
+
     } catch (error) {
         console.error("Database error:", error);
         res.status(500).json({ message: "Database error" });
