@@ -2,145 +2,218 @@ const express = require("express");
 const path = require("path");
 const router = express.Router();
 const session = require("express-session");
-const { connectDB, closeDBConnection } = require("./db");
+const { connectDB } = require("./db"); // Import the database connection
+const MongoStore = require("connect-mongo");
 
+const MONGO_URI = "mongodb+srv://vicky:vicky123@autorest.xacrthx.mongodb.net";
 
-// Configure session middleware
-router.use(session({
-    secret: "vicky", // Change this to a strong secret key
+// Session configuration
+router.use(
+  session({
+    name: "bomboozledSession",
+    secret: "your_strong_secret_here", // Replace with a strong, random secret
     resave: false,
-    saveUninitialized: true,
-}));
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: MONGO_URI,
+      dbName: "studentinfo",
+      collectionName: "sessions",
+      ttl: 24 * 60 * 60, // 1 day session expiration (86,400 seconds)
+    }),
+    cookie: {
+      secure: process.env.NODE_ENV === "production", // Secure in production
+      httpOnly: true,
+      sameSite: "lax",
+    },
+  })
+);
 
-// Middleware to check if user is authenticated
+// Middleware to track the last visited page
+function trackLastPage(req, res, next) {
+  if (req.session.user) {
+    req.session.lastPage = req.path;
+  }
+  next();
+}
+
+// Middleware to enforce returning to the last visited page (only for GET requests)
+function enforceLastPage(req, res, next) {
+  if (
+    req.session.user &&
+    req.session.lastPage &&
+    req.path !== req.session.lastPage &&
+    req.method === "GET"
+  ) {
+    return res.redirect(req.session.lastPage);
+  }
+  next();
+}
+
+// Middleware to check if the user is authenticated
 function isAuthenticated(req, res, next) {
-    if (req.session.user) {
-        return next();
-    }
-    return res.status(403).json({ message: "Access denied. Please log in or register." });
+  if (req.session.user) {
+    return next();
+  }
+  return res
+    .status(403)
+    .json({ message: "Access denied. Please log in or register." });
 }
 
 // Middleware to prevent logged-in users from accessing login/register pages
 function preventAuthPages(req, res, next) {
-    if (req.session.user) {
-        return res.redirect("/bomboozled");
-    }
-    next();
+  if (req.session.user) {
+    return res.redirect(req.session.lastPage || "/bomboozled");
+  }
+  next();
 }
 
-
-// Serve static HTML pages
-router.get("/bomboozled",isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "main.html"));
+// Static page routes
+router.get("/bomboozled", isAuthenticated, trackLastPage, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
 router.get("/register", preventAuthPages, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "from.html"));
+  res.sendFile(path.join(__dirname, "public", "from.html"));
 });
 
 router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "dashboard.html"));
+  res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
-router.get("/final",isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "final.html"));
+router.get("/final", isAuthenticated, trackLastPage, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "final.html"));
 });
 
-router.get("/loginpage",preventAuthPages, (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "login.html"));
+router.get("/loginpage", preventAuthPages, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-router.post("/logout", (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.status(500).json({ message: "Logout failed" });
-        }
-        res.status(200).json({ message: "Logout successfulyy by vicky", redirectUrl: "/loginpage" });
-    });
+// Apply enforceLastPage middleware globally (affects only GET requests due to condition)
+router.use(enforceLastPage);
+
+// Logout route
+router.post("/logout", async (req, res) => {
+  console.log("Logout request received");
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      return res.status(500).json({ message: "Error logging out" });
+    }
+    res.clearCookie("bomboozledSession");
+    console.log("Session destroyed and cookie cleared");
+    res
+      .status(200)
+      .json({ message: "Logout successful", redirectUrl: "/loginpage" });
+  });
 });
 
+// Login route with input validation
 router.post("/login", async (req, res) => {
+  const { email, contactNumber } = req.body;
 
-    const { email, contactNumber } = req.body;
+  // Check for presence of required fields
+  if (!email || !contactNumber) {
+    return res
+      .status(400)
+      .json({ message: "Email and contact number are required" });
+  }
 
-    if (!email || !contactNumber) {
-        return res.status(400).json({ message: "Email and contact number are required" });
+  // Basic email format validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return res.status(400).json({ message: "Invalid email format" });
+  }
+
+  // Contact number must be 10 digits
+  if (!/^\d{10}$/.test(contactNumber)) {
+    return res
+      .status(400)
+      .json({ message: "Contact number must be 10 digits" });
+  }
+
+  try {
+    const { collection } = await connectDB();
+    const user = await collection.findOne({
+      email: email,
+      contactno: contactNumber,
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found. Please register or check your details.",
+      });
     }
 
-    try {
-        const { collection } = await connectDB();
+    req.session.user = {
+      name: user.name,
+      email: user.email,
+    };
 
-        // Find user by email and contact number
-        const user = await collection.findOne({ 
-            email: email, 
-            contactno: contactNumber 
-        });
-
-        if (!user) {
-            return res.status(404).json({ message: "User not found. Please register or check your details." });
-        }
-
-        // Store user session
-        req.session.user = {
-            name: user.name,
-            email: user.email
-        };
-
-        // Successful login
-        res.status(200).json({
-            message: "Login Successful",
-            name: user.name,
-            redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
-        });
-
-    } catch (error) {
-        console.error("Login error:", error);
-        res.status(500).json({ message: "Server error during login" });
-        }
+    req.session.save((err) => {
+      if (err) {
+        console.error("Session save error:", err);
+        return res.status(500).json({ message: "Session error" });
+      }
+      res.status(200).json({
+        message: "Login Successful",
+        name: user.name,
+        redirectUrl: "/bomboozled", // Relative URL
+      });
+    });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error during login" });
+  }
 });
 
-
-// Handle form submission
+// Registration route with input validation
 router.post("/data", async (req, res) => {
-    const { playerName, contactNumber, emailAddress, college, otherCollegeName } = req.body;
-    console.log(playerName,contactNumber);
-    
+  const { playerName, contactNumber, emailAddress, college, otherCollegeName } =
+    req.body;
 
-    if (!playerName || !contactNumber || !emailAddress || !college) {
-        return res.status(400).json({ message: "All fields are required" });
-    }
+  // Check for presence of required fields
+  if (!playerName || !contactNumber || !emailAddress || !college) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
 
-    try {
-        const { collection } = await connectDB();
+  // Basic email format validation
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailAddress)) {
+    return res.status(400).json({ message: "Invalid email format" });
+  }
 
-        const newStudent = {
-            name: playerName,
-            contactno: contactNumber,
-            email: emailAddress,
-            college: college,
-            collegename: otherCollegeName || null,
-        };
+  // Contact number must be 10 digits
+  if (!/^\d{10}$/.test(contactNumber)) {
+    return res
+      .status(400)
+      .json({ message: "Contact number must be 10 digits" });
+  }
 
-        const result = await collection.insertOne(newStudent);
+  try {
+    const { collection } = await connectDB();
+    const newStudent = {
+      name: playerName,
+      contactno: contactNumber,
+      email: emailAddress,
+      college: college,
+      collegename: otherCollegeName || null,
+    };
 
-        console.log("Registration Successful:", result.insertedId);
+    const result = await collection.insertOne(newStudent);
+    console.log("Registration Successful:", result.insertedId);
 
-        req.session.user = {
-            name: playerName,
-            email: emailAddress
-        };
+    req.session.user = {
+      name: playerName,
+      email: emailAddress,
+    };
 
-        res.status(201).json({
-            message: "Registration Successful",
-            studentId: result.insertedId,
-            redirectUrl: "https://bamboozled-v-2.vercel.app/bomboozled"
-        });
-
-    } catch (error) {
-        console.error("Database error:", error);
-        res.status(500).json({ message: "Database error" });
-    }
-
-
+    res.status(201).json({
+      message: "Registration Successful",
+      studentId: result.insertedId,
+      redirectUrl: "/bomboozled", // Relative URL
+    });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ message: "Database error" });
+  }
 });
+
 module.exports = router;
