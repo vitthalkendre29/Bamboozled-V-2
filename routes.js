@@ -60,7 +60,7 @@ function isAuthenticated(req, res, next) {
 }
 
 function checkresult(req, res, next) {
-  if (req.session.email="kendrevitthal225@gmail.com") {
+  if (req.session.email === "kendrevitthal225@gmail.com") {
     return next();
   }
   return res
@@ -100,7 +100,7 @@ router.get("/final", isAuthenticated, trackLastPage, (req, res) => {
 router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
-router.get("/result", checkresult, (req, res) => {
+router.get("/result", checkresult, isAuthenticated ,(req, res) => {
   res.sendFile(path.join(__dirname, "public", "bamboozled-accuracy-checker.html"));
 });
 
@@ -177,6 +177,14 @@ router.post("/data", async (req, res) => {
 
   try {
     const { collection } = await connectDB();
+
+    const existingStudent = await collection.findOne({ email: emailAddress });
+    if (existingStudent) {
+      return res.status(400).json({
+        message: "You are already registered with this email.",
+      });
+    }
+
     const newStudent = {
       name: playerName,
       contactno: contactNumber,
@@ -192,7 +200,7 @@ router.post("/data", async (req, res) => {
       name: playerName,
       email: emailAddress,
     };
-``
+
     res.status(201).json({
       message: "Registration Successful",
       studentId: result.insertedId,
