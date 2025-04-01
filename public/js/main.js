@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const paragraphCard = document.createElement("div");
   paragraphCard.className = "problem-card";
   paragraphCard.innerHTML = `
-        <h3>Problem ${randomParagraphProblem.id}: ${randomParagraphProblem.title}</h3>
+        <h3>Paragraph ${randomParagraphProblem.id}: ${randomParagraphProblem.title}</h3>
         <p>${randomParagraphProblem.description}</p>
         
     `;
