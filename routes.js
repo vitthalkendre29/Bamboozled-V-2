@@ -93,9 +93,7 @@ router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-router.get("/result", preventAuthPages, (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "bamboozled-accuracy-checker.html"));
-});
+
 
 // Apply enforceLastPage middleware globally (affects only GET requests due to condition)
 router.use(enforceLastPage);
