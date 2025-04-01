@@ -159,11 +159,11 @@
             for (let j = 0; j < 3; j++) {
               const asciiValue = i + j;
               if (asciiValue <= 126) {
-                const hexValue = asciiValue.toString(16).toUpperCase().padStart(2, '0');
+                // const hexValue = asciiValue.toString(16).toUpperCase().padStart(2, '0');
                 const charValue = String.fromCharCode(asciiValue);
                 
                 tableHTML += `<td class="ascii-code">${asciiValue}</td>`;
-                tableHTML += `<td>0x${hexValue}</td>`;
+                // tableHTML += `<td>0x${hexValue}</td>`;
                 tableHTML += `<td class="ascii-char">${charValue}</td>`;
               } else {
                 // Empty cells for remaining slots

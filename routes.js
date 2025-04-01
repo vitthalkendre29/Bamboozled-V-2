@@ -60,12 +60,15 @@ function isAuthenticated(req, res, next) {
 }
 
 function checkresult(req, res, next) {
+  if (!req.session.user) {
+    return res.status(403).json({ message: "Access denied. Please log in or register." });
+  }
+
   if (req.session.user.email === "kendrevitthal225@gmail.com") {
     return next();
   }
-  return res
-    .status(403)
-    .json({ message: "Access denied. Please log in or register." });
+  
+  return res.status(403).json({ message: "Access denied." });
 }
 
 // Middleware to prevent logged-in users from accessing login/register pages
@@ -89,7 +92,7 @@ router.get("/register", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "from.html"));
 });
 
-router.get("/", (req, res) => {
+router.get("/",preventAuthPages,(req, res) => {
   res.sendFile(path.join(__dirname, "public", "dashboard.html"));
 });
 
