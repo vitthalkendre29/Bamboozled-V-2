@@ -317,8 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return String.fromCharCode(char.charCodeAt(0) + ASCII_SHIFT);
       }
     } else if (level === 2) {
-        if (char === "Backspace") return "Shift";
-        if (char === "Shift") return "Backspace";
+    
 
         // Disable Caps Lock (convert uppercase to lowercase)
         if (char.match(/[A-Z]/)) {
