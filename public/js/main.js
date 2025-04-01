@@ -1,109 +1,106 @@
 // Define problem sets
-const paragraphProblems = {
-    "paragraphs": [
-      {
-        "id": 1,
-        "title": "Black Holes: Cosmic Mysteries",
-        "description": "Did you know that black holes can 'spaghettify' objects? If you got too close, the intense gravitational pull would stretch you like a noodle! Also, the largest known black hole, TON 618, has a mass of 40 billion suns—big enough to swallow entire solar systems!"
-      },
-      {
-        "id": 2,
-        "title": "Quantum Computing Revolution",
-        "description": "Quantum computers can solve problems in seconds that would take classical computers millions of years! Google’s quantum computer, Sycamore, once performed a calculation in 200 seconds that the world’s fastest supercomputer would need 10,000 years to complete!"
-      },
-      {
-        "id": 3,
-        "title": "AI Creating Art & Music",
-        "description": "AI-generated art has sold for millions! In 2018, a painting made by an AI called Edmond de Belamy was auctioned for $432,500. AI can also compose music—Beethoven’s unfinished 10th Symphony was completed by an AI in 2021!"
-      },
-      {
-        "id": 4,
-        "title": "5G & 6G: The Speed Race",
-        "description": "5G is fast, but 6G could be 100 times faster, allowing holographic calls in real time! Scientists even predict that 6G may use human bodies as antennas, turning us into living signal boosters!"
-      },
-      {
-        "id": 5,
-        "title": "The First Aircraft on Mars",
-        "description": "NASA’s Ingenuity helicopter flew on Mars using blades that spin 5 times faster than Earth’s helicopters due to the thin atmosphere! If you could run on Mars, you’d jump three times higher than on Earth!"
-      },
-      {
-        "id": 6,
-        "title": "The Search for Alien Life",
-        "description": "Astronomers have found over 5,000 exoplanets, some in the habitable zone where life might exist! The James Webb Space Telescope is scanning these worlds for biosignatures—gases that hint at alien life!"
-      },
-      {
-        "id": 7,
-        "title": "Self-Healing Materials",
-        "description": "Scientists have created materials that can repair themselves, much like human skin! Future smartphones could heal their own cracks, and buildings might automatically fix structural damage."
-      },
-      {
-        "id": 8,
-        "title": "Electric Planes: The Future of Aviation",
-        "description": "Electric planes could reduce carbon emissions from air travel by 90%! NASA is testing the X-57 Maxwell, an all-electric aircraft that runs on batteries instead of jet fuel."
-      },
-      {
-        "id": 9,
-        "title": "Holographic Displays",
-        "description": "Holograms aren’t just for sci-fi movies! Researchers are developing true 3D holographic displays that don’t need special glasses, revolutionizing entertainment, education, and even medical imaging."
-      },
-      {
-        "id": 10,
-        "title": "Quantum Internet: Unhackable Network",
-        "description": "China’s Micius satellite has demonstrated quantum communication, making data transmission theoretically unhackable! A future quantum internet could provide total security for banking and government communications."
-      },
-      {
-        "id": 11,
-        "title": "AI-Powered Doctors",
-        "description": "AI can now diagnose diseases from medical scans with 95% accuracy, sometimes even outperforming human doctors! Could AI-assisted healthcare soon become the norm?"
-      },
-      {
-        "id": 12,
-        "title": "Bioprinting Human Organs",
-        "description": "Using 3D printing and living cells, scientists are creating human organs like kidneys and hearts! In the future, transplant patients might receive fully lab-grown organs instead of donor ones."
-      },
-      {
-        "id": 13,
-        "title": "Brain-Computer Interfaces",
-        "description": "Neuralink is working on brain chips that could let people control devices with their thoughts! In the future, BCIs might even allow us to store and replay memories."
-      },
-      {
-        "id": 14,
-        "title": "Underwater Cities of the Future",
-        "description": "With rising sea levels, architects are designing futuristic underwater cities! These self-sustaining habitats could house thousands of people beneath the ocean’s surface."
-      },
-      {
-        "id": 15,
-        "title": "The Future of Space Travel",
-        "description": "NASA and SpaceX are working on nuclear-powered spacecraft that could reach Mars in just 45 days! Could interstellar travel be just around the corner?"
-      },
-      {
-        "id": 16,
-        "title": "Robotic Swarms",
-        "description": "Inspired by ants and bees, robotic swarms can work together to build structures, explore planets, and even assist in disaster rescue operations!"
-      },
-      {
-        "id": 17,
-        "title": "Living Robots: Xenobots",
-        "description": "Scientists have created tiny living robots called Xenobots from frog cells! These self-healing bio-machines could one day help clean microplastics from oceans or even deliver medicine inside our bodies."
-      },
-      {
-        "id": 18,
-        "title": "DNA Data Storage",
-        "description": "A single gram of DNA can store **215 petabytes** of data! Future computers may use DNA as a storage medium, making hard drives obsolete!"
-      },
-      {
-        "id": 19,
-        "title": "Fusion Power: Unlimited Energy",
-        "description": "Nuclear fusion, the process that powers the sun, could provide clean, limitless energy! Scientists have achieved brief fusion reactions—longer ones could revolutionize global energy production."
-      },
-      {
-        "id": 20,
-        "title": "Teleportation: Quantum Entanglement",
-        "description": "Teleportation isn’t just science fiction! Scientists have successfully 'teleported' quantum particles over 100 kilometers. Could human teleportation become a reality one day?"
-      }
-    ]
-  }
-  
+const paragraphProblems =[
+    {
+      "id": 1,
+      "title": "Black Holes: Cosmic Mysteries",
+      "description": "Did you know that black holes can 'spaghettify' objects? If you got too close, the intense gravitational pull would stretch you like a noodle! Also, the largest known black hole, TON 618, has a mass of 40 billion suns—big enough to swallow entire solar systems!"
+    },
+    {
+      "id": 2,
+      "title": "Quantum Computing Revolution",
+      "description": "Quantum computers can solve problems in seconds that would take classical computers millions of years! Google’s quantum computer, Sycamore, once performed a calculation in 200 seconds that the world’s fastest supercomputer would need 10,000 years to complete!"
+    },
+    {
+      "id": 3,
+      "title": "AI Creating Art & Music",
+      "description": "AI-generated art has sold for millions! In 2018, a painting made by an AI called Edmond de Belamy was auctioned for $432,500. AI can also compose music—Beethoven’s unfinished 10th Symphony was completed by an AI in 2021!"
+    },
+    {
+      "id": 4,
+      "title": "5G & 6G: The Speed Race",
+      "description": "5G is fast, but 6G could be 100 times faster, allowing holographic calls in real time! Scientists even predict that 6G may use human bodies as antennas, turning us into living signal boosters!"
+    },
+    {
+      "id": 5,
+      "title": "The First Aircraft on Mars",
+      "description": "NASA’s Ingenuity helicopter flew on Mars using blades that spin 5 times faster than Earth’s helicopters due to the thin atmosphere! If you could run on Mars, you’d jump three times higher than on Earth!"
+    },
+    {
+      "id": 6,
+      "title": "The Search for Alien Life",
+      "description": "Astronomers have found over 5,000 exoplanets, some in the habitable zone where life might exist! The James Webb Space Telescope is scanning these worlds for biosignatures—gases that hint at alien life!"
+    },
+    {
+      "id": 7,
+      "title": "Self-Healing Materials",
+      "description": "Scientists have created materials that can repair themselves, much like human skin! Future smartphones could heal their own cracks, and buildings might automatically fix structural damage."
+    },
+    {
+      "id": 8,
+      "title": "Electric Planes: The Future of Aviation",
+      "description": "Electric planes could reduce carbon emissions from air travel by 90%! NASA is testing the X-57 Maxwell, an all-electric aircraft that runs on batteries instead of jet fuel."
+    },
+    {
+      "id": 9,
+      "title": "Holographic Displays",
+      "description": "Holograms aren’t just for sci-fi movies! Researchers are developing true 3D holographic displays that don’t need special glasses, revolutionizing entertainment, education, and even medical imaging."
+    },
+    {
+      "id": 10,
+      "title": "Quantum Internet: Unhackable Network",
+      "description": "China’s Micius satellite has demonstrated quantum communication, making data transmission theoretically unhackable! A future quantum internet could provide total security for banking and government communications."
+    },
+    {
+      "id": 11,
+      "title": "AI-Powered Doctors",
+      "description": "AI can now diagnose diseases from medical scans with 95% accuracy, sometimes even outperforming human doctors! Could AI-assisted healthcare soon become the norm?"
+    },
+    {
+      "id": 12,
+      "title": "Bioprinting Human Organs",
+      "description": "Using 3D printing and living cells, scientists are creating human organs like kidneys and hearts! In the future, transplant patients might receive fully lab-grown organs instead of donor ones."
+    },
+    {
+      "id": 13,
+      "title": "Brain-Computer Interfaces",
+      "description": "Neuralink is working on brain chips that could let people control devices with their thoughts! In the future, BCIs might even allow us to store and replay memories."
+    },
+    {
+      "id": 14,
+      "title": "Underwater Cities of the Future",
+      "description": "With rising sea levels, architects are designing futuristic underwater cities! These self-sustaining habitats could house thousands of people beneath the ocean’s surface."
+    },
+    {
+      "id": 15,
+      "title": "The Future of Space Travel",
+      "description": "NASA and SpaceX are working on nuclear-powered spacecraft that could reach Mars in just 45 days! Could interstellar travel be just around the corner?"
+    },
+    {
+      "id": 16,
+      "title": "Robotic Swarms",
+      "description": "Inspired by ants and bees, robotic swarms can work together to build structures, explore planets, and even assist in disaster rescue operations!"
+    },
+    {
+      "id": 17,
+      "title": "Living Robots: Xenobots",
+      "description": "Scientists have created tiny living robots called Xenobots from frog cells! These self-healing bio-machines could one day help clean microplastics from oceans or even deliver medicine inside our bodies."
+    },
+    {
+      "id": 18,
+      "title": "DNA Data Storage",
+      "description": "A single gram of DNA can store **215 petabytes** of data! Future computers may use DNA as a storage medium, making hard drives obsolete!"
+    },
+    {
+      "id": 19,
+      "title": "Fusion Power: Unlimited Energy",
+      "description": "Nuclear fusion, the process that powers the sun, could provide clean, limitless energy! Scientists have achieved brief fusion reactions—longer ones could revolutionize global energy production."
+    },
+    {
+      "id": 20,
+      "title": "Teleportation: Quantum Entanglement",
+      "description": "Teleportation isn’t just science fiction! Scientists have successfully 'teleported' quantum particles over 100 kilometers. Could human teleportation become a reality one day?"
+    }
+  ];
 
 const equationProblems = [
   {
