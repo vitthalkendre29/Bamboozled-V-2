@@ -60,16 +60,6 @@ function isAuthenticated(req, res, next) {
     .json({ message: "Access denied. Please log in or register." });
 }
 
-
-function checkresult(req, res, next) {
-  if (req.session.email=== "kendrevitthal225@gmail.com") {
-    return next();
-  }
-  return res
-    .status(403)
-    .json({ message: "Access denied. Please log in or register." });
-}
-
 // Middleware to prevent logged-in users from accessing login/register pages
 function preventAuthPages(req, res, next) {
   if (req.session.user) {
@@ -103,7 +93,7 @@ router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
 
-router.get("/result", checkresult, (req, res) => {
+router.get("/result", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "bamboozled-accuracy-checker.html"));
 });
 
