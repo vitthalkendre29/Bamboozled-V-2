@@ -18,7 +18,7 @@ router.use(
       mongoUrl: MONGO_URI,
       dbName: "studentinfo",
       collectionName: "sessions",
-      ttl: 30 * 60 , // 1 day session expiration (86,400 seconds)
+      ttl: 17 * 60 , // 1 day session expiration (86,400 seconds)
     }),
     cookie: {
       expires: 30 * 60 , // 1 day in millisecond
@@ -92,8 +92,6 @@ router.get("/final", isAuthenticated, trackLastPage, (req, res) => {
 router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
-
-
 
 // Apply enforceLastPage middleware globally (affects only GET requests due to condition)
 router.use(enforceLastPage);
