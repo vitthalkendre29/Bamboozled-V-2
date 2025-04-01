@@ -250,6 +250,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let completedtime = timeLeft;
   let downloadAttempted = false;
   let downloadAttemptedandretry = false;
+  const MIN_ASCII = 32; // Minimum printable ASCII character
+  const MAX_ASCII = 126
 
   document.getElementById("playerName").innerText = nameofplayer;
 
@@ -325,10 +327,16 @@ document.addEventListener("DOMContentLoaded", function () {
       
           // Disable Caps Lock (convert uppercase to lowercase)
           if (char.match(/[A-Z]/)) {
-            return char.toLowerCase();
+            char = char.toLowerCase();
           }
       
-          return String.fromCharCode(char.charCodeAt(0) + ASCII_SHIFT);
+          // Apply ASCII shift only in the range 32 to 126 and loop within that range
+          let newCharCode = char.charCodeAt(0) + ASCII_SHIFT;
+          if (newCharCode > MAX_ASCII) {
+            newCharCode = MIN_ASCII + (newCharCode - MAX_ASCII - 1);
+          }
+      
+          return String.fromCharCode(newCharCode);
     }
     return char;
   }
