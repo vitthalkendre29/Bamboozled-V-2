@@ -325,10 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return char;
           }
       
-          // Disable Caps Lock (convert uppercase to lowercase)
-          if (char.match(/[A-Z]/)) {
-            char = char.toLowerCase();
-          }
+          
       
           // Apply ASCII shift only in the range 32 to 126 and loop within that range
           let newCharCode = char.charCodeAt(0) + ASCII_SHIFT;
