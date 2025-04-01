@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Invalid level! Choose 1 or 2.");
     }
   };
-  const ASCII_SHIFT = randomEquationProblem.answer;
+  const ASCII_SHIFT = randomEquationProblem.answer % 26;
 
   function transformCharacter(char, level) {
     if (level === 1) {

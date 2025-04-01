@@ -18,7 +18,7 @@ router.use(
       mongoUrl: MONGO_URI,
       dbName: "studentinfo",
       collectionName: "sessions",
-      ttl: 24 * 60 * 60, // 1 day session expiration (86,400 seconds)
+      ttl: 17 * 60 , // 1 day session expiration (86,400 seconds)
     }),
     cookie: {
       secure: false, // Secure in production
