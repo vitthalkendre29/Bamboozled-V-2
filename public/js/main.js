@@ -319,11 +319,16 @@ document.addEventListener("DOMContentLoaded", function () {
     } else if (level === 2) {
     
 
-        // Disable Caps Lock (convert uppercase to lowercase)
-        if (char.match(/[A-Z]/)) {
+        if (char === " " || char === "Backspace" || char === "Shift") {
+            return char;
+          }
+      
+          // Disable Caps Lock (convert uppercase to lowercase)
+          if (char.match(/[A-Z]/)) {
             return char.toLowerCase();
-        }
-        return String.fromCharCode(char.charCodeAt(0) + ASCII_SHIFT);
+          }
+      
+          return String.fromCharCode(char.charCodeAt(0) + ASCII_SHIFT);
     }
     return char;
   }
