@@ -100,7 +100,7 @@ router.get("/final", isAuthenticated, trackLastPage, (req, res) => {
 router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
 });
-router.get("/result", checkresult, isAuthenticated ,(req, res) => {
+router.get("/result", checkresult ,(req, res) => {
   res.sendFile(path.join(__dirname, "public", "bamboozled-accuracy-checker.html"));
 });
 
