@@ -688,3 +688,227 @@
         font-size: 26px;
     }
 }
+
+.ascii-btn {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #2d0359, #c4298e);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Orbitron", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(196, 41, 142, 0.7);
+    transition: all 0.3s ease;
+  }
+
+  .ascii-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(196, 41, 142, 0.9);
+  }
+
+  .ascii-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1001;
+    overflow-y: auto;
+  }
+
+  .ascii-modal-content {
+    position: relative;
+    background: rgba(28, 15, 45, 0.95);
+    margin: 50px auto;
+    padding: 30px;
+    max-width: 900px;
+    border-radius: 20px;
+    border: 1px solid rgba(196, 41, 142, 0.5);
+    box-shadow: 0 0 30px rgba(196, 41, 142, 0.5);
+    animation: fadeIn 0.3s;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .ascii-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(196, 41, 142, 0.3);
+    padding-bottom: 15px;
+  }
+
+  .ascii-modal-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 28px;
+    color: #c4298e;
+  }
+
+  .close-modal {
+    width: 60px;
+    height: 60px;
+    font-size: 42px;
+    color: #ffffff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-modal:hover {
+    color: #c4298e;
+  }
+
+  .ascii-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .ascii-table th {
+    background: rgba(45, 3, 89, 0.5);
+    padding: 10px;
+    text-align: center;
+    font-family: "Orbitron", sans-serif;
+    color: #ffffff;
+    border: 1px solid rgba(196, 41, 142, 0.3);
+  }
+
+  .ascii-table td {
+    padding: 8px 12px;
+    text-align: center;
+    border: 1px solid rgba(196, 41, 142, 0.3);
+    font-size: 16px;
+  }
+
+  .ascii-table tr:nth-child(even) {
+    background: rgba(45, 3, 89, 0.2);
+  }
+
+  .ascii-table tr:hover {
+    background: rgba(196, 41, 142, 0.2);
+  }
+
+  .ascii-code {
+    font-weight: 700;
+    color: #c4298e;
+  }
+
+  .ascii-char {
+    font-family: monospace;
+    font-size: 18px;
+    color: #ffffff;
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(196, 41, 142, 0.8);
+    }
+    100% {
+      box-shadow: 0 0 10px rgba(196, 41, 142, 0.5);
+    }
+  }
+
+  @keyframes shine {
+    0% {
+      left: -100px;
+    }
+    20% {
+      left: 100%;
+    }
+    100% {
+      left: 100%;
+    }
+  }
+
+  @keyframes techLine {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes rotateGradient {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes colorShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @media (max-width: 768px) {
+
+    .ascii-btn {
+      width: 50px;
+      height: 50px;
+      font-size: 14px;
+      bottom: 20px;
+      right: 20px;
+    }
+
+    .ascii-modal-content {
+      margin: 30px 15px;
+      padding: 20px;
+    }
+
+    .ascii-table td, .ascii-table th {
+      padding: 6px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    
+
+    .ascii-table {
+      font-size: 12px;
+    }
+
+    .ascii-modal-title {
+      font-size: 22px;
+    }
+  }

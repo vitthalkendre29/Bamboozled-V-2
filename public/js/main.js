@@ -324,9 +324,6 @@ document.addEventListener("DOMContentLoaded", function () {
         if (char === " " || char === "Backspace" || char === "Shift") {
             return char;
           }
-      
-          
-      
           // Apply ASCII shift only in the range 32 to 126 and loop within that range
           let newCharCode = char.charCodeAt(0) + ASCII_SHIFT;
           if (newCharCode > MAX_ASCII) {
