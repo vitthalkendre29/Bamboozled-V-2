@@ -20,8 +20,7 @@ router.use(
       collectionName: "sessions",
       ttl: 17 * 60 , // 1 day session expiration (86,400 seconds)
     }),
-    cookie: {
-      expires: 30 * 60 , // 1 day in millisecond
+    cookie: { // 1 day in millisecond
       secure: false, // Secure in production
       httpOnly: true,
       sameSite: "lax",
