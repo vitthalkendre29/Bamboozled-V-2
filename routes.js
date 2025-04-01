@@ -18,9 +18,10 @@ router.use(
       mongoUrl: MONGO_URI,
       dbName: "studentinfo",
       collectionName: "sessions",
-      ttl: 17 * 60 , // 1 day session expiration (86,400 seconds)
+      ttl: 30 * 60 , // 1 day session expiration (86,400 seconds)
     }),
     cookie: {
+      expires: 30 * 60 , // 1 day in millisecond
       secure: false, // Secure in production
       httpOnly: true,
       sameSite: "lax",
@@ -59,6 +60,16 @@ function isAuthenticated(req, res, next) {
     .json({ message: "Access denied. Please log in or register." });
 }
 
+
+function checkresult(req, res, next) {
+  if (req.session.email=== "kendrevitthal225@gmail.com") {
+    return next();
+  }
+  return res
+    .status(403)
+    .json({ message: "Access denied. Please log in or register." });
+}
+
 // Middleware to prevent logged-in users from accessing login/register pages
 function preventAuthPages(req, res, next) {
   if (req.session.user) {
@@ -90,6 +101,10 @@ router.get("/final", isAuthenticated, trackLastPage, (req, res) => {
 
 router.get("/loginpage", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "login.html"));
+});
+
+router.get("/result", checkresult, (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "bamboozled-accuracy-checker.html"));
 });
 
 // Apply enforceLastPage middleware globally (affects only GET requests due to condition)
