@@ -60,7 +60,7 @@ function isAuthenticated(req, res, next) {
 }
 
 function checkresult(req, res, next) {
-  if (req.session.email === "kendrevitthal225@gmail.com") {
+  if (req.session.user.email === "kendrevitthal225@gmail.com") {
     return next();
   }
   return res
