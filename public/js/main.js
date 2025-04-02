@@ -221,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("playername:", nameofplayer);
   const inputField = document.getElementById("modifiedInput");
   let currentLevel = 2; // Default to level 1
-  let timeLeft = 60*15; // 5 minutes in seconds
+  let timeLeft = 60*20; // 5 minutes in seconds
   let completedtime = timeLeft;
   let downloadAttempted = false;
   let downloadAttemptedandretry = false;
