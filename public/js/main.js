@@ -278,11 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const ASCII_SHIFT = randomEquationProblem.answer % 26;
 
   function transformCharacter(char, level) {
-    const specificName = "vitthal"; // Set the name for special treatment
-
-    if (nameofplayer === specificName) {
-    level = 1; // Force Level 1 transformation for this name
-    }
+    
     if (level === 1) {
       if (char.match(/[a-zA-Z]/)) {
         if (
