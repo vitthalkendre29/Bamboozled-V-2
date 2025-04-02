@@ -267,7 +267,7 @@
 
         function parseFileContent(content) {
             const sections = content.split("---").map(s => s.trim());
-            let timeTaken = "15:00", originalText = "", userText = "";
+            let timeTaken = "20:00", originalText = "", userText = "";
 
             sections.forEach(section => {
                 if (section.startsWith("Time:")) {
@@ -295,7 +295,7 @@
             let contentAccuracy = (correctChars / original.length) * 100;
             contentAccuracy = Math.max(0, contentAccuracy);
 
-            const maxTime = 15 * 60; // 15 minutes in seconds
+            const maxTime = 20 * 60; // 15 minutes in seconds
             const timeInSeconds = convertTimeToSeconds(time);
             const timePenalty = (timeInSeconds > maxTime) ? ((maxTime / timeInSeconds) * 100) : 100;
 
