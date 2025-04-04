@@ -1,7 +1,7 @@
 const { MongoClient } = require("mongodb");
 
 // Use environment variables for sensitive connection information
-const uri =  "mongodb+srv://vicky:vicky123@autorest.xacrthx.mongodb.net";
+const uri =  "stringurl"; // Replace with your MongoDB connection string
 
 // Create a global client variable
 let mongoClient;
