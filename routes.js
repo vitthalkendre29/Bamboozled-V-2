@@ -88,6 +88,11 @@ router.get("/bomboozled", isAuthenticated, trackLastPage, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "main.html"));
 });
 
+router.get("/bill", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "bhakti.html"));
+});
+
+
 router.get("/register", preventAuthPages, (req, res) => {
   res.sendFile(path.join(__dirname, "public", "from.html"));
 });
