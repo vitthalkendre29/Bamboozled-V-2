@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhakti Tus Sinnar - Bill Management System</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a154b;
+            --secondary-color: #f2c94c;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --border-color: #ddd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        
+        .header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            flex: 1;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main {
+            flex: 3;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #6b3b6c;
+        }
+        
+        .login-form {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-form h2 {
+            text-align: center;
+        }
+        
+        .bill-preview {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            margin-top: 20px;
+            position: relative;
+        }
+        
+        .bill-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 100px;
+            color: rgba(0, 0, 0, 0.05);
+            pointer-events: none;
+        }
+        
+        .bill-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .bill-header h2 {
+            color: var(--primary-color);
+            border-bottom: none;
+            margin-bottom: 5px;
+            font-size: 28px;
+        }
+        
+        .bill-header p {
+            color: #666;
+        }
+        
+        .bill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .bill-info-item {
+            flex: 1;
+        }
+        
+        .bill-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .bill-table th, .bill-table td {
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            text-align: left;
+        }
+        
+        .bill-table th {
+            background-color: #f2f2f2;
+        }
+        
+        .bill-total {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .bill-footer {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .signature {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .bill-list {
+            margin-top: 20px;
+        }
+        
+        .bill-card {
+            padding: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+        }
+        
+        .bill-card:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Application -->
+    <div id="app-section">
+        <div class="header">
+            <h1>Bhakti Tus Sinnar</h1>
+            <p>Driven by KENDRE DADA</p>
+        </div>
+        
+        <div class="container">
+            <div class="tabs">
+                <div class="tab active" data-tab="new-bill">New Bill</div>
+                <div class="tab" data-tab="bill-history">Bill History</div>
+                <div class="tab" data-tab="settings">Settings</div>
+                <!-- Removed logout button -->
+            </div>
+            
+            <!-- New Bill Tab -->
+            <div id="new-bill" class="tab-content active">
+                <div class="content">
+                    <div class="sidebar">
+                        <h2>Create New Bill</h2>
+                        <div class="form-group">
+                            <label for="customer-name">Customer Name</label>
+                            <input type="text" id="customer-name" placeholder="Enter customer name">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-address">Customer Address</label>
+                            <input type="text" id="customer-address" placeholder="Enter customer address">
+                        </div>
+                        <div class="form-group">
+                            <label for="customer-phone">Customer Phone</label>
+                            <input type="text" id="customer-phone" placeholder="Enter customer phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="bag-quantity">Quantity of Bags (Goni)</label>
+                            <input type="number" id="bag-quantity" placeholder="Enter quantity" min="1" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="avg-weight">Average Weight per Bag (kg)</label>
+                            <input type="number" id="avg-weight" placeholder="Enter average weight" step="0.01" min="0.01" value="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="price-per-kg">Price per Kg (₹)</label>
+                            <input type="number" id="price-per-kg" placeholder="Enter price per kg" step="0.01" min="0.01" value="7.7">
+                        </div>
+                        <button id="preview-btn" type="button" style="background-color: #2e7d32;">Preview Bill</button>
+                        <button id="calculate-btn" type="button">Calculate & Generate</button>
+                    </div>
+                    
+                    <div class="main">
+                        <h2>Bill Preview</h2>
+                        <div id="bill-preview" class="bill-preview">
+                            <div class="watermark">PREVIEW</div>
+                            <div class="bill-header">
+                                <h2>Bhakti Tus Sinnar</h2>
+                                <p>Driven by KENDRE DADA</p>
+                                <p>Sinnar, Maharashtra</p>
+                                <p>Contact: +91 9876543210</p>
+                            </div>
+                            
+                            <div class="bill-info">
+                                <div class="bill-info-item">
+                                    <p><strong>Bill No:</strong> <span id="bill-number">-</span></p>
+                                    <p><strong>Date:</strong> <span id="bill-date">-</span></p>
+                                </div>
+                                <div class="bill-info-item">
+                                    <p><strong>Customer:</strong> <span id="bill-customer-name">-</span></p>
+                                    <p><strong>Address:</strong> <span id="bill-customer-address">-</span></p>
+                                    <p><strong>Phone:</strong> <span id="bill-customer-phone">-</span></p>
+                                </div>
+                            </div>
+                            
+                            <table class="bill-table">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Quantity (Bags)</th>
+                                        <th>Avg. Weight (kg)</th>
+                                        <th>Total Weight (kg)</th>
+                                        <th>Rate (₹/kg)</th>
+                                        <th>Amount (₹)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Tus Bags</td>
+                                        <td id="bill-quantity">-</td>
+                                        <td id="bill-avg-weight">-</td>
+                                        <td id="bill-total-weight">-</td>
+                                        <td id="bill-rate">-</td>
+                                        <td id="bill-amount">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <div class="bill-total">
+                                <p>Total Amount: ₹ <span id="bill-total-amount">-</span></p>
+                                <p style="font-size: 14px; margin-top: 5px;">Amount in words: <span id="amount-in-words">-</span></p>
+                            </div>
+                            
+                            <div class="bill-footer">
+                                <div class="signature">
+                                    <p>Customer's Signature</p>
+                                </div>
+                                <div class="signature">
+                                    <p>For Bhakti Tus Sinnar</p>
+                                    <p style="margin-top: 30px;">Authorized Signatory</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bill-actions hidden" id="bill-actions">
+                            <button id="generate-pdf-btn" type="button">Generate PDF</button>
+                            <button id="save-bill-btn" type="button">Save Bill</button>
+                            <button id="reset-bill-btn" type="button">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bill History Tab -->
+            <div id="bill-history" class="tab-content">
+                <h2>Bill History</h2>
+                <div class="form-group">
+                    <input type="text" id="search-bills" placeholder="Search by customer name or bill number...">
+                </div>
+                <div id="bill-list" class="bill-list">
+                    <!-- Bill history will be populated here -->
+                    <div class="bill-card">
+                        <div>
+                            <strong>Bill #: 000001</strong>
+                            <p>Customer: John Doe</p>
+                            <p>Date: 11 May, 2025</p>
+                        </div>
+                        <div>
+                            <p>Amount: ₹ 3,080.00</p>
+                            <button class="view-bill-btn" data-id="000001">View Bill</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Tab -->
+            <div id="settings" class="tab-content">
+                <h2>Settings</h2>
+                <div class="form-group">
+                    <label for="default-price">Default Price per Kg (₹)</label>
+                    <input type="number" id="default-price" value="7.7" step="0.01" min="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="company-phone">Company Phone Number</label>
+                    <input type="text" id="company-phone" value="+91 9876543210">
+                </div>
+                <div class="form-group">
+                    <label for="company-address">Company Address</label>
+                    <input type="text" id="company-address" value="Sinnar, Maharashtra">
+                </div>
+                <button id="save-settings-btn" type="button">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentBillNumber = null;
+        let billsData = [];
+        let settings = {
+            defaultPrice: 7.7,
+            companyPhone: "+91 9876543210",
+            companyAddress: "Sinnar, Maharashtra"
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Load bills from local storage (in real app, this would be from MongoDB)
+            loadBillsFromStorage();
+            
+            // Load settings from local storage
+            loadSettings();
+        });
+
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Bill calculation and preview
+            document.getElementById('preview-btn').addEventListener('click', previewBill);
+            document.getElementById('calculate-btn').addEventListener('click', calculateAndGenerateBill);
+            
+            // Bill actions
+            document.getElementById('generate-pdf-btn').addEventListener('click', generatePDF);
+            document.getElementById('save-bill-btn').addEventListener('click', saveBill);
+            document.getElementById('reset-bill-btn').addEventListener('click', resetBill);
+            
+            // Settings
+            document.getElementById('save-settings-btn').addEventListener('click', saveSettings);
+            
+            // Bill search
+            document.getElementById('search-bills').addEventListener('input', searchBills);
+        }
+
+        function switchTab(tabId) {
+            // Remove active class from all tabs and tab contents
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab and content
+            document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function previewBill() {
+            // Get input values
+            const customerName = document.getElementById('customer-name').value;
+            const customerAddress = document.getElementById('customer-address').value;
+            const customerPhone = document.getElementById('customer-phone').value;
+            const quantity = parseFloat(document.getElementById('bag-quantity').value) || 0;
+            const avgWeight = parseFloat(document.getElementById('avg-weight').value) || 0;
+            const pricePerKg = parseFloat(document.getElementById('price-per-kg').value) || 0;
+            
+            // Validate inputs
+            if (!customerName) {
+                alert('Please enter customer name');
+                return;
+            }
+            
+            if (quantity <= 0 || avgWeight <= 0 || pricePerKg <= 0) {
+                alert('Please enter valid values for quantity, average weight, and price per kg');
+                return;
+            }
+            
+            // Calculate totals
+            const totalWeight = quantity * avgWeight;
+            const totalAmount = totalWeight * pricePerKg;
+            
+            // Update bill preview
+            document.getElementById('bill-date').textContent = moment().format('DD MMM, YYYY');
+            document.getElementById('bill-customer-name').textContent = customerName;
+            document.getElementById('bill-customer-address').textContent = customerAddress || 'N/A';
+            document.getElementById('bill-customer-phone').textContent = customerPhone || 'N/A';
+            document.getElementById('bill-quantity').textContent = quantity;
+            document.getElementById('bill-avg-weight').textContent = avgWeight.toFixed(2);
+            document.getElementById('bill-total-weight').textContent = totalWeight.toFixed(2);
+            document.getElementById('bill-rate').textContent = pricePerKg.toFixed(2);
+            document.getElementById('bill-amount').textContent = totalAmount.toFixed(2);
+            document.getElementById('bill-total-amount').textContent = totalAmount.toFixed(2);
+            document.getElementById('amount-in-words').textContent = numberToWords(totalAmount) + ' Rupees Only';
+        }
+
+        function calculateAndGenerateBill() {
+            // First do the preview
+            previewBill();
+            
+            // Then generate bill number if not already generated
+            if (!currentBillNumber) {
+                currentBillNumber = generateBillNumber();
+            }
+            
+            // Update bill number in preview
+            document.getElementById('bill-number').textContent = currentBillNumber;
+            
+            // Show bill actions
+            document.getElementById('bill-actions').classList.remove('hidden');
+            
+            // Remove watermark for actual bill preview
+            document.querySelector('.watermark').textContent = '';
+        }
+
+        function generateBillNumber() {
+            // Get the latest bill number from storage and increment
+            let lastBillNumber = localStorage.getItem('lastBillNumber') || 0;
+            const newBillNumber = (parseInt(lastBillNumber) + 1).toString().padStart(6, '0');
+            localStorage.setItem('lastBillNumber', newBillNumber);
+            return newBillNumber;
+        }
+
+        function generatePDF() {
+            // Create a clone of the bill preview without the actions
+            const billElement = document.getElementById('bill-preview');
+            
+            // Generate PDF using html2canvas and jsPDF
+            window.html2canvas(billElement).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new window.jspdf.jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save(`Bhakti_Tus_Bill_${currentBillNumber}.pdf`);
+            });
+        }
+
+        function saveBill() {
+            // Get bill data
+            const billData = {
+                billNumber: currentBillNumber,
+                date: moment().format('DD MMM, YYYY'),
+                customerName: document.getElementById('bill-customer-name').textContent,
+                customerAddress: document.getElementById('bill-customer-address').textContent,
+                customerPhone: document.getElementById('bill-customer-phone').textContent,
+                quantity: parseFloat(document.getElementById('bill-quantity').textContent),
+                avgWeight: parseFloat(document.getElementById('bill-avg-weight').textContent),
+                totalWeight: parseFloat(document.getElementById('bill-total-weight').textContent),
+                rate: parseFloat(document.getElementById('bill-rate').textContent),
+                amount: parseFloat(document.getElementById('bill-total-amount').textContent),
+                timestamp: Date.now()
+            };
+            
+            // Add to bills array
+            billsData.unshift(billData);
+            
+            // Save to local storage (in real app, this would save to MongoDB)
+            saveBillsToStorage();
+            
+            // Update bill list display
+            updateBillList();
+            
+            // Show success message
+            alert('Bill saved successfully!');
+            
+            // Reset the form for new bill
+            resetBill();
+            
+            // Switch to bill history tab
+            switchTab('bill-history');
+        }
+
+        function resetBill() {
+            // Clear form fields
+            document.getElementById('customer-name').value = '';
+            document.getElementById('customer-address').value = '';
+            document.getElementById('customer-phone').value = '';
+            document.getElementById('bag-quantity').value = '1';
+            document.getElementById('avg-weight').value = '1';
+            document.getElementById('price-per-kg').value = settings.defaultPrice.toString();
+            
+            // Reset bill preview
+            document.getElementById('bill-number').textContent = '-';
+            document.getElementById('bill-date').textContent = '-';
+            document.getElementById('bill-customer-name').textContent = '-';
+            document.getElementById('bill-customer-address').textContent = '-';
+            document.getElementById('bill-customer-phone').textContent = '-';
+            document.getElementById('bill-quantity').textContent = '-';
+            document.getElementById('bill-avg-weight').textContent = '-';
+            document.getElementById('bill-total-weight').textContent = '-';
+            document.getElementById('bill-rate').textContent = '-';
+            document.getElementById('bill-amount').textContent = '-';
+            document.getElementById('bill-total-amount').textContent = '-';
+            document.getElementById('amount-in-words').textContent = '-';
+            
+            // Add watermark back
+            document.querySelector('.watermark').textContent = 'PREVIEW';
+            
+            // Hide bill actions
+            document.getElementById('bill-actions').classList.add('hidden');
+            
+            // Reset bill number
+            currentBillNumber = null;
+        }
+
+        function saveBillsToStorage() {
+            localStorage.setItem('billsData', JSON.stringify(billsData));
+        }
+
+        function loadBillsFromStorage() {
+            const storedBills = localStorage.getItem('billsData');
+            if (storedBills) {
+                billsData = JSON.parse(storedBills);
+                updateBillList();
+            }
+        }
+
+        function updateBillList() {
+            const billListElement = document.getElementById('bill-list');
+            billListElement.innerHTML = '';
+            
+            if (billsData.length === 0) {
+                billListElement.innerHTML = '<p>No bills found.</p>';
+                return;
+            }
+            
+            billsData.forEach(bill => {
+                const billCard = document.createElement('div');
+                billCard.className = 'bill-card';
+                billCard.innerHTML = `
+                    <div>
+                        <strong>Bill #: ${bill.billNumber}</strong>
+                        <p>Customer: ${bill.customerName}</p>
+                        <p>Date: ${bill.date}</p>
+                    </div>
+                    <div>
+                        <p>Amount: ₹ ${bill.amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                        <button class="view-bill-btn" data-id="${bill.billNumber}">View Bill</button>
+                    </div>
+                `;
+                
+                // Add event listener to view bill button
+                billListElement.appendChild(billCard);
+                const viewBtn = billCard.querySelector('.view-bill-btn');
+                viewBtn.addEventListener('click', () => viewBill(bill.billNumber));
+            });
+        }
+
+        function viewBill(billNumber) {
+            // Find the bill data
+            const bill = billsData.find(b => b.billNumber === billNumber);
+            if (!bill) {
+                alert('Bill not found');
+                return;
+            }
+            
+            // Set current bill number
+            currentBillNumber = bill.billNumber;
+            
+            // Update bill preview with data
+            document.getElementById('bill-number').textContent = bill.billNumber;
+            document.getElementById('bill-date').textContent = bill.date;
+            document.getElementById('bill-customer-name').textContent = bill.customerName;
+            document.getElementById('bill-customer-address').textContent = bill.customerAddress;
+            document.getElementById('bill-customer-phone').textContent = bill.customerPhone;
+            document.getElementById('bill-quantity').textContent = bill.quantity;
+            document.getElementById('bill-avg-weight').textContent = bill.avgWeight.toFixed(2);
+            document.getElementById('bill-total-weight').textContent = bill.totalWeight.toFixed(2);
+            document.getElementById('bill-rate').textContent = bill.rate.toFixed(2);
+            document.getElementById('bill-amount').textContent = bill.amount.toFixed(2);
+            document.getElementById('bill-total-amount').textContent = bill.amount.toFixed(2);
+            document.getElementById('amount-in-words').textContent = numberToWords(bill.amount) + ' Rupees Only';
+            
+            // Show bill actions
+            document.getElementById('bill-actions').classList.remove('hidden');
+            
+            // Remove watermark
+            document.querySelector('.watermark').textContent = '';
+            
+            // Switch to new bill tab to show the bill
+            switchTab('new-bill');
+        }
+
+        function searchBills() {
+            const searchTerm = document.getElementById('search-bills').value.toLowerCase();
+            const filteredBills = billsData.filter(bill => 
+                bill.customerName.toLowerCase().includes(searchTerm) || 
+                bill.billNumber.includes(searchTerm)
+            );
+            
+            const billListElement = document.getElementById('bill-list');
+            billListElement.innerHTML = '';
+            
+            if (filteredBills.length === 0) {
+                billListElement.innerHTML = '<p>No matching bills found.</p>';
+                return;
+            }
+            
+            filteredBills.forEach(bill => {
+                const billCard = document.createElement('div');
+                billCard.className = 'bill-card';
+                billCard.innerHTML = `
+                    <div>
+                        <strong>Bill #: ${bill.billNumber}</strong>
+                        <p>Customer: ${bill.customerName}</p>
+                        <p>Date: ${bill.date}</p>
+                    </div>
+                    <div>
+                        <p>Amount: ₹ ${bill.amount.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                        <button class="view-bill-btn" data-id="${bill.billNumber}">View Bill</button>
+                    </div>
+                `;
+                
+                billListElement.appendChild(billCard);
+                const viewBtn = billCard.querySelector('.view-bill-btn');
+                viewBtn.addEventListener('click', () => viewBill(bill.billNumber));
+            });
+        }
+
+        function saveSettings() {
+            settings.defaultPrice = parseFloat(document.getElementById('default-price').value) || 7.7;
+            settings.companyPhone = document.getElementById('company-phone').value;
+            settings.companyAddress = document.getElementById('company-address').value;
+            
+            // Save settings to local storage
+            localStorage.setItem('settings', JSON.stringify(settings));
+            
+            // Update price field in new bill form
+            document.getElementById('price-per-kg').value = settings.defaultPrice;
+            
+            // Update company info in bill preview
+            document.querySelectorAll('.bill-header p')[1].textContent = settings.companyAddress;
+            document.querySelectorAll('.bill-header p')[2].textContent = 'Contact: ' + settings.companyPhone;
+            
+            alert('Settings saved successfully!');
+        }
+        
+        function loadSettings() {
+            const storedSettings = localStorage.getItem('settings');
+            if (storedSettings) {
+                settings = JSON.parse(storedSettings);
+                
+                // Update settings form fields
+                document.getElementById('default-price').value = settings.defaultPrice;
+                document.getElementById('company-phone').value = settings.companyPhone;
+                document.getElementById('company-address').value = settings.companyAddress;
+                
+                // Update price field in new bill form
+                document.getElementById('price-per-kg').value = settings.defaultPrice;
+                
+                // Update company info in bill preview
+                document.querySelectorAll('.bill-header p')[1].textContent = settings.companyAddress;
+                document.querySelectorAll('.bill-header p')[2].textContent = 'Contact: ' + settings.companyPhone;
+            }
+        }
+        
+        // Function to convert number to words
+        function numberToWords(number) {
+            const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+            const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+            
+            const numString = number.toFixed(2);
+            const parts = numString.split('.');
+            let rupees = parseInt(parts[0]);
+            const paise = parseInt(parts[1]);
+            
+            if (number === 0) return 'Zero';
+            
+            function convertLessThanOneThousand(n) {
+                if (n === 0) return '';
+                else if (n < 20) return ones[n] + ' ';
+                else if (n < 100) return tens[Math.floor(n / 10)] + ' ' + convertLessThanOneThousand(n % 10);
+                else return ones[Math.floor(n / 100)] + ' Hundred ' + convertLessThanOneThousand(n % 100);
+            }
+            
+            let result = '';
+            
+            // Convert crores
+            if (rupees >= 10000000) {
+                result += convertLessThanOneThousand(Math.floor(rupees / 10000000)) + 'Crore ';
+                rupees %= 10000000;
+            }
+            
+            // Convert lakhs
+            if (rupees >= 100000) {
+                result += convertLessThanOneThousand(Math.floor(rupees / 100000)) + 'Lakh ';
+                rupees %= 100000;
+            }
+            
+            // Convert thousands
+            if (rupees >= 1000) {
+                result += convertLessThanOneThousand(Math.floor(rupees / 1000)) + 'Thousand ';
+                rupees %= 1000;
+            }
+            
+            // Convert remaining rupees
+            if (rupees > 0) {
+                result += convertLessThanOneThousand(rupees);
+            }
+            
+            // Convert paise if any
+            if (paise > 0) {
+                result += 'and ' + convertLessThanOneThousand(paise) + 'Paise';
+            }
+            
+            return result.trim();
+        }
