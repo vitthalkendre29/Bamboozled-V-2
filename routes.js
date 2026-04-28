@@ -5,7 +5,7 @@ const session = require("express-session");
 const { connectDB } = require("./db"); // Import the database connection
 const MongoStore = require("connect-mongo");
 
-const MONGO_URI = "mongodb+srv://vicky:vicky123@autorest.xacrthx.mongodb.net";
+const MONGO_URI = "";
 
 // Session configuration
 router.use(
